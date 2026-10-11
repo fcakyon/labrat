@@ -83,6 +83,9 @@ For each equation in the paper:
 For each citation in the paper:
 
 **Step 1**: Extract the claim and the cited paper
+
+Use `paper-search tool get_crossref_paper_by_doi <doi>` to retrieve the cited record. For an arXiv paper, use `paper-search download arxiv <id>` and `paper-search read arxiv <id>`. See [setup](../../commands/setup.md#paper-search-when-needed) if the CLI is missing. Inspect the PDF itself when text extraction loses table or equation layout.
+
 **Step 2**: Verify BibTeX metadata against DBLP:
 - Author names (exact spelling, correct order)
 - Paper title (exact, from published version not preprint)

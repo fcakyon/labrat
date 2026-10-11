@@ -22,7 +22,7 @@ The user just said any of:
 
 | Stage | What                                                           | Reference                                                      |
 | ----- | -------------------------------------------------------------- | -------------------------------------------------------------- |
-| 1     | Paper acquisition (arxiv HTML → structured extract)            | [references/01-paper-fetch.md](references/01-paper-fetch.md)   |
+| 1     | Paper acquisition (CLI + PDF → structured extract)            | [references/01-paper-fetch.md](references/01-paper-fetch.md)   |
 | 2     | Existing code discovery + inventory                            | [references/02-code-clone.md](references/02-code-clone.md)     |
 | 3     | Gap analysis (extract every missing hyperparam from the prose) | [references/03-gap-analysis.md](references/03-gap-analysis.md) |
 | 4     | Implementation (uv venv, fill gaps, commit per gap)            | [references/04-implement.md](references/04-implement.md)       |

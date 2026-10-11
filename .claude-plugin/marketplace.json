@@ -16,7 +16,7 @@
         "path": "plugin"
       },
       "description": "Catch AI mistakes before they cost weeks of compute. Reproduce papers from arxiv. Debug runs evidence-first. Compare experiments at the right epoch. Launch with discipline.",
-      "version": "1.3.0",
+      "version": "1.4.0",
       "author": {
         "name": "Fatih Cagatay Akyon"
       },
