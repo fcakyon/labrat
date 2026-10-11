@@ -25,14 +25,20 @@ Before searching:
 Use multiple search strategies in order:
 
 ### 2a. Direct Search
-- Search for the topic using key terms via web search
-- Target: Google Scholar, Semantic Scholar, arXiv, DBLP
-- Vary search terms to catch different framings of the same concept
+Use [Paper Search CLI](https://github.com/fcakyon/paper-search-cli); follow [setup](../../commands/setup.md#paper-search-when-needed) if it is missing.
+
+```bash
+paper-search search 'object detection' -s fast -n 5
+paper-search search 'object detection' -s arxiv,crossref -n 5
+```
+
+Inspect the JSON `errors` field and retain each paper's source ID and URL. Report unavailable providers rather than treating errors as an empty literature search. Vary search terms to catch different framings of the same concept. Use web search for proceedings and sources the CLI cannot access.
 
 ### 2b. Citation Chaining
 From seed papers or initial results:
-- **Forward chaining**: who cited this paper? (find via Semantic Scholar or Google Scholar)
-- **Backward chaining**: what does this paper cite? (read its references)
+- **Forward chaining**: run `paper-search tool get_citing_papers <doi>`
+- **Backward chaining**: run `paper-search tool get_referenced_papers <doi>`
+- Both accept a DOI or OpenAlex work ID, not a title. Inspect pagination and truncation metadata; neither command promises an exhaustive citation list. Read the paper's reference section to verify cited works.
 - This catches papers that use different terminology but address the same problem
 
 ### 2c. Venue Mining

@@ -14,6 +14,8 @@ PhD research. Every guardrail in this plugin traces to a real mistake.
 
 ---
 
+Paper search and acquisition use [Paper Search CLI](https://github.com/fcakyon/paper-search-cli), installed with uv and Python 3.10+. See [paper search setup](plugin/commands/setup.md#paper-search-when-needed). Other skills do not require it.
+
 ## Why This Plugin Exists
 
 Claude Code is powerful, but it makes research-specific mistakes that cost weeks of compute:
@@ -119,7 +121,7 @@ Notifications (task completion, background agents) forward to ntfy / Slack / ema
 | Paper reproduction (arxiv to runs)        | **Yes** (7-stage skill)     | No                           | No           |
 | Paper-code consistency audit              | 5-dimension parallel        | Read-only, no code cross-ref | None         |
 | Experiment monitoring + SSH notifications | Yes (ntfy / slack / email)  | No                           | No           |
-| External dependencies                     | **None**                    | npm + pip + MCP servers      | MCP required |
+| External dependencies                     | **Paper Search CLI for paper workflows**                    | npm + pip + MCP servers      | MCP required |
 | Install time                              | 30 seconds                  | 10+ minutes                  | Varies       |
 
 ---

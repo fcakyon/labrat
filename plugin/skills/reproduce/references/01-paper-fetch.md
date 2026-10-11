@@ -10,37 +10,27 @@ Fetch the paper into a structured local extract before doing anything else. Work
 
 ## Steps
 
-### 1. Prefer the HTML version
+### 1. Fetch the paper with Paper Search CLI
 
-ArXiv's HTML rendering (`https://arxiv.org/html/<id>`) is far easier to parse than the PDF. Try it first via the Tavily MCP tool:
+Use [fcakyon/paper-search-cli](https://github.com/fcakyon/paper-search-cli). Follow the paper search section of [setup](../../../commands/setup.md) if the command is missing.
 
-```
-mcp__tavily__tavily_extract({
-  urls: ["https://arxiv.org/html/2508.12345v1"],
-  extract_depth: "advanced"
-})
-```
+For an arXiv paper, keep the supplied version suffix so the PDF matches the user's reference:
 
-If HTML is missing or broken, fall back to:
-
-- `mcp__tavily__tavily_extract` on the abstract page (`/abs/<id>`) to get bibliographic info
-- The `pdf` skill (anthropic-office-skills:pdf) on the PDF URL for full content
-
-### 2. Cross-check with HuggingFace papers
-
-Use the HF papers tool to find paper metadata, related papers, and any community-maintained reproduction notes:
-
-```
-mcp__claude_ai_Hugging_Face__paper_search({
-  query: "<paper title or arxiv id>"
-})
+```bash
+paper-search search 'id:1706.03762v7' -s arxiv -n 1
+paper-search download arxiv 1706.03762v7 -o ./repro/1706.03762v7
+paper-search read arxiv 1706.03762v7 -o ./repro/1706.03762v7
 ```
 
-This often surfaces:
+Replace the example ID and directory with the requested paper. Search returns JSON; inspect `errors`. The `read` command writes extracted plain text to stdout; it does not create the structured Markdown document. Keep the downloaded PDF as the primary source.
 
-- official author code repo (when arxiv didn't link it)
-- community reproductions (huggingface spaces, gradio demos)
-- related papers cited later
+For a DOI, use `paper-search tool get_crossref_paper_by_doi <doi>`. Discover other providers with `paper-search sources` and their operations with `paper-search tool --help`. Do not pass an arbitrary URL as a provider paper ID.
+
+For a direct PDF URL or an unsupported proceedings site, download the publisher's public PDF with `curl -fL` and use an available PDF reader. ArXiv HTML at `https://arxiv.org/html/<id>` can help with equations and tables. If access fails, report the failure; do not substitute abstract text for the full paper.
+
+### 2. Verify the PDF and find the official code
+
+Inspect rendered PDF pages for equations, figures, and table values that text extraction may scramble. Check author names, venue, and year against the published record. Follow the paper's code link or search GitHub with `gh search repos`; verify a candidate repository links back to the paper before calling it official.
 
 ### 3. Capture into `repro/<id>/paper.md`
 
