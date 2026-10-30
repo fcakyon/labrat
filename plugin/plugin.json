@@ -1,0 +1,22 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "labrat",
+  "version": "2.0.0",
+  "description": "Lab Rat: catch AI mistakes before they cost weeks of compute. Reproduce papers from arxiv. Debug runs evidence-first. Compare experiments at the right epoch. Launch with discipline.",
+  "author": {
+    "name": "Fatih Cagatay Akyon"
+  },
+  "homepage": "https://github.com/fcakyon/labrat",
+  "repository": "https://github.com/fcakyon/labrat",
+  "license": "MIT",
+  "keywords": [
+    "research",
+    "academic",
+    "phd",
+    "paper-reproduction",
+    "debugging",
+    "experiment-analysis",
+    "citations",
+    "latex"
+  ]
+}

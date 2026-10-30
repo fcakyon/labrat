@@ -35,12 +35,40 @@ Other plugins give you more commands. **This plugin gives you guardrails.**
 
 ## Install
 
-```
+**Claude Code**
+
+```sh
 claude plugin marketplace add fcakyon/labrat
 claude plugin install labrat@labrat
 ```
 
 Coming from phd-skills? Remove it first with `claude plugin uninstall phd-skills@phd-skills` and `claude plugin marketplace remove phd-skills`.
+
+**Codex**
+
+```sh
+codex plugin marketplace add fcakyon/labrat
+codex plugin add labrat@labrat
+```
+
+**Cursor**
+
+```sh
+cursor-agent plugin marketplace add https://github.com/fcakyon/labrat
+```
+
+Then start `cursor-agent`, enter `/plugin` and install Lab Rat.
+
+**Gemini CLI**
+
+```sh
+git clone https://github.com/fcakyon/labrat ~/.labrat
+gemini extensions link ~/.labrat/plugin
+```
+
+Update with `git -C ~/.labrat pull`.
+
+All four tools get the same 11 skills. The guardrail hooks run in Claude Code only.
 
 The plugin works correctly the moment it is installed. Optional: run `/labrat:setup` for a 30-second tour of what was auto-detected and to opt into extras (notifications, allowlist, LaTeX).
 
@@ -82,7 +110,7 @@ Notifications (task completion, background agents) forward to ntfy / Slack / ema
 
 | What it catches                                                                                           |
 | --------------------------------------------------------------------------------------------------------- |
-| [Conclusions reviewed against actual artifacts by a fresh-context research peer](plugin/hooks/hooks.json) |
+| [Conclusions reviewed against actual artifacts by a fresh-context research peer](plugin/hooks/claude-hooks.json) |
 | [Pointer to the launch skill when an ML training job starts](plugin/scripts/launch_context.sh)            |
 
 ---
