@@ -1,37 +1,19 @@
-<p align="center"><img src="assets/labrat.svg" alt="Lab Rat logo" width="120"></p>
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/logo-dark.svg" />
+    <img src="assets/logo-light.svg" alt="Lab Rat logo" width="80" height="80" />
+  </picture>
+</p>
+<h1 align="center">Lab Rat</h1>
 
-# Lab Rat
+Lab Rat teaches your AI coding agent to work like a careful ML researcher: reproduce papers, launch and compare runs at the same epoch, and check every claim before it costs you weeks of compute.
 
-Catch AI mistakes before they cost weeks of compute. Reproduce papers from arxiv. Debug runs evidence-first. Compare experiments at the right epoch. Launch with discipline.
+Built by [Fatih Cagatay Akyon](https://scholar.google.com/citations?user=RHGyDE0AAAAJ) (2000+ citations, 5 patents) from 300+ Claude Code sessions. Every guardrail traces to a real mistake.
 
-Built by [Fatih Cagatay Akyon](https://scholar.google.com/citations?user=RHGyDE0AAAAJ)
-(2000+ citations, 5 patents) after 300+ Claude Code sessions, tens of
-critical AI mistakes caught the hard way, and thousands of hours of
-PhD research. Every guardrail in this plugin traces to a real mistake.
-
-![Claude Code Plugin](https://img.shields.io/badge/Claude_Code-Plugin-blue)
-![MIT License](https://img.shields.io/badge/License-MIT-green)
-![No MCP Required](https://img.shields.io/badge/MCP-Not_Required-lightgrey)
-
----
-
-Paper search and acquisition use [Paper Search CLI](https://github.com/fcakyon/paper-search-cli), installed with uv and Python 3.10+. See [paper search setup](plugin/skills/literature-research/references/paper-search.md). Other skills do not require it.
-
-## Why This Plugin Exists
-
-Claude Code is powerful, but it makes research-specific mistakes that cost weeks of compute:
-
-- It typed "done?" as "dont?" and launched an unwanted upload of thousands of files
-- It analyzed my full dataset when I asked for a specific 4k/2k/2k split
-- It claimed a test covered a bug it had never actually verified
-- It never once looked at a figure it generated, just trusted the numbers
-- It restarted a 50-hour training job without diffing the config against the reference run, lost three days
-- It claimed an experiment was diverging based on a non-converged proxy metric, killed it before downstream eval would have shown the truth
-- It ran `rm -rf` on a path it had hallucinated from memory, lost local checkpoints
-
-Other plugins give you more commands. **This plugin gives you guardrails.**
-
----
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/flow-dark.svg" />
+  <img src="assets/flow-light.svg" alt="Find papers, reproduce, design, launch, compare and publish, with compare looping back to design for the next experiment" width="980" />
+</picture>
 
 ## Install
 
@@ -70,9 +52,9 @@ Update with `git -C ~/.labrat pull`.
 
 All four tools get the same 11 skills. The guardrail hooks run in Claude Code only.
 
-The plugin works correctly the moment it is installed. Optional: run `/labrat:setup` for a 30-second tour of what was auto-detected and to opt into extras (notifications, allowlist, LaTeX).
+Paper search and acquisition use [Paper Search CLI](https://github.com/fcakyon/paper-search-cli), installed with uv and Python 3.10+. See [paper search setup](plugin/skills/literature-research/references/paper-search.md). Other skills do not require it.
 
----
+The plugin works correctly the moment it is installed. Optional: run `/labrat:setup` for a 30-second tour of what was auto-detected and to opt into extras (notifications, allowlist, LaTeX).
 
 ## Usage
 
@@ -86,7 +68,16 @@ Open Claude Code in your project directory, then:
 
 Notifications (task completion, background agents) forward to ntfy / Slack / email after `/labrat:setup`.
 
----
+## Why This Plugin Exists
+
+AI agents make research mistakes that cost weeks of compute. Real ones from my sessions:
+
+- It typed "done?" as "dont?" and launched an unwanted upload of thousands of files
+- It restarted a 50-hour training job without diffing the config against the reference run, lost three days
+- It killed an experiment over a non-converged proxy metric, before downstream eval would have shown the truth
+- It ran `rm -rf` on a path it had hallucinated from memory, lost local checkpoints
+
+Other plugins give you more commands. **This plugin gives you guardrails.**
 
 ## What You Get
 
@@ -113,8 +104,6 @@ Notifications (task completion, background agents) forward to ntfy / Slack / ema
 | [Conclusions reviewed against actual artifacts by a fresh-context research peer](plugin/hooks/claude-hooks.json) |
 | [Pointer to the launch skill when an ML training job starts](plugin/scripts/launch_context.sh)            |
 
----
-
 ## How It Compares
 
 |                                           | Lab Rat                     | flonat/claude-research       | Others       |
@@ -127,15 +116,11 @@ Notifications (task completion, background agents) forward to ntfy / Slack / ema
 | External dependencies                     | **Paper Search CLI for paper workflows**                    | npm + pip + MCP servers      | MCP required |
 | Install time                              | 30 seconds                  | 10+ minutes                  | Varies       |
 
----
-
 ## Design Principles
 
 1. **Methodology over scripts**. Skills teach the approach, Claude generates code for your specific setup (wandb, neptune, local files, whatever)
 2. **Human oversight first**. Claude makes premature claims and jumps to conclusions. Every skill builds in verification checkpoints
 3. **Actionable output**. Ranked suggestions with specific fixes, never just a list of findings
-
----
 
 ## License
 
