@@ -1,13 +1,16 @@
 ---
+name: setup
 description: >
   30-second auto-detection tour, then optional configuration of notifications,
   CLI allowlist, research CLAUDE.md rules, and LaTeX environment.
+  Use when the user runs /phd-skills:setup.
+disable-model-invocation: true
 allowed-tools: Read, Write, Edit, Bash, Glob, Grep, AskUserQuestion
 ---
 
 # PHD-Skills Setup
 
-The plugin works correctly the moment it is installed. Most users never need to run setup. This command exists to (1) show what was auto-detected on the user's system, and (2) let users opt into a few extras (notifications, allowlist, project CLAUDE.md, LaTeX).
+The plugin works correctly the moment it is installed. Most users never need to run setup. This skill exists to (1) show what was auto-detected on the user's system, and (2) let users opt into a few extras (notifications, allowlist, project CLAUDE.md, LaTeX).
 
 ## Step 0: Auto-detection tour (always run first)
 
@@ -16,15 +19,8 @@ Before asking any questions, print what the plugin already knows. No prompts, no
 Run these probes silently and present the results:
 
 ```bash
-# System timezone
-sys_tz=$(date +%Z)
-sys_tz_long=$(readlink /etc/localtime 2> /dev/null | sed 's|.*zoneinfo/||')
-
 # Last few long-job launches the plugin would have flagged
 recent_launches=$(history 200 2> /dev/null | grep -E '(python.*train|accelerate launch|torchrun|deepspeed|sbatch|tmux.*python)' | tail -5)
-
-# Sample jargon-shape hits in user's recent commits (if in a git repo)
-jargon_hits=$(git log -50 --pretty=format:%s 2> /dev/null | grep -E '\bwave-[0-9]+\b|\bphase-internal\b|\binternal-only\b' | head -3)
 
 # What the agentic Stop hook would orient on for this project
 project_orientation=""
@@ -39,13 +35,11 @@ Then present:
 ```
 phd-skills auto-detected the following:
 
-Timezone:           ${sys_tz} (${sys_tz_long})
 Recent launches:    <count> training-job patterns in shell history
-Jargon hits:        <count> commits with internal-jargon shapes
 Project orientation: ${project_orientation:-no README / CLAUDE.md / AGENTS.md found at project root}
 
 This is what the hooks and agentic Stop hook will use. No configuration needed.
-The plugin works on the first command. Hooks fire silently when there is nothing to flag.
+The plugin works on the first prompt. Hooks fire silently when there is nothing to flag.
 
 Want to configure any extras? (notifications, allowlist, CLAUDE.md, LaTeX) [y/N]
 ```
@@ -142,39 +136,14 @@ Ask the user to confirm, then:
 
 ## Step 5: LaTeX Environment (if selected)
 
-Trigger the `latex-setup` skill by telling the user:
-
-```
-I'll now analyze your LaTeX setup and install any missing components.
-```
-
-Then follow the latex-setup skill methodology:
-
-1. Check installed TeX distribution
-2. Analyze .tex files for requirements
-3. Install missing packages
-4. Verify compilation works
+Follow [the LaTeX setup](../paper-write/references/latex.md).
 
 ## Paper search (when needed)
 
-Literature search and paper acquisition use [Paper Search CLI](https://github.com/fcakyon/paper-search-cli). Other skills do not require it. It needs uv and Python 3.10+, with no Docker or MCP server.
-
-Check `paper-search --help`. If missing, install [uv](https://docs.astral.sh/uv/getting-started/installation/), then run:
-
-```bash
-uv tool install 'git+https://github.com/fcakyon/paper-search-cli'
-paper-search sources
-paper-search search 'object detection' -s crossref -n 3
-```
-
-If the executable is not on PATH, run `uv tool update-shell` and open a new shell. Update an existing installation with `uv tool upgrade paper-search-cli`.
-
-Inspect the search JSON's `errors` field before reporting success. Configure optional provider credentials using the CLI's [.env.example](https://github.com/fcakyon/paper-search-cli/blob/main/.env.example) in `~/.config/paper-search-mcp/.env`. These legacy names remain supported. IEEE, Scopus, and Web of Science need credentials; select Scopus and Web of Science explicitly. Never print keys or promise paywalled PDF access from a metadata key.
+See [paper search setup](../literature-research/references/paper-search.md).
 
 ## Escape hatches (mention only if asked)
 
 The plugin avoids configuration on purpose. If a user really wants to override:
 
 - **Suppress a hook**: edit `~/.claude/settings.json` and set `"hooks.<event>.<matcher>.disabled": true` (Claude Code's standard mechanism)
-- **Override timezone**: set `TZ=Region/City` env var (system standard)
-- **Stop the jargon scrubber from flagging a token**: add the token to your project's `README.md` or any `docs/*.md`. The scrubber treats documented tokens as legitimate.

@@ -2,9 +2,11 @@
 name: literature-research
 description: >
   Use when the user wants to find related work, survey a research area,
-  identify literature gaps, or discover open-source implementations.
+  run a literature gap analysis, or discover open-source implementations.
+  Maps existing work on a topic and confirms with web search what is missing.
   Triggers on phrases like "find papers on", "related work",
-  "literature review", "what papers exist", "open source implementation",
+  "literature review", "what papers exist", "gap analysis",
+  "literature gaps", "what's missing in", "open source implementation",
   or "papers with code".
 ---
 
@@ -25,20 +27,20 @@ Before searching:
 Use multiple search strategies in order:
 
 ### 2a. Direct Search
-Use [Paper Search CLI](https://github.com/fcakyon/paper-search-cli); follow [setup](../../commands/setup.md#paper-search-when-needed) if it is missing.
+Use [Paper Search CLI](https://github.com/fcakyon/paper-search-cli). Follow [paper search setup](references/paper-search.md) if it is missing.
 
 ```bash
 paper-search search 'object detection' -s fast -n 5
 paper-search search 'object detection' -s arxiv,crossref -n 5
 ```
 
-Inspect the JSON `errors` field and retain each paper's source ID and URL. Report unavailable providers rather than treating errors as an empty literature search. Vary search terms to catch different framings of the same concept. Use web search for proceedings and sources the CLI cannot access.
+Inspect the JSON `errors` field and retain each paper's source ID and URL. Report unavailable providers rather than treating errors as an empty literature search. Vary search terms to catch different framings of the same concept. Use web search for proceedings and sources the CLI cannot access, and check Google Scholar, Semantic Scholar, and arXiv. Look for survey papers that map the area.
 
 ### 2b. Citation Chaining
 From seed papers or initial results:
 - **Forward chaining**: run `paper-search tool get_citing_papers <doi>`
 - **Backward chaining**: run `paper-search tool get_referenced_papers <doi>`
-- Both accept a DOI or OpenAlex work ID, not a title. Inspect pagination and truncation metadata; neither command promises an exhaustive citation list. Read the paper's reference section to verify cited works.
+- Both accept a DOI or OpenAlex work ID, not a title. Inspect pagination and truncation metadata. Neither command promises an exhaustive citation list. Read the paper's reference section to verify cited works.
 - This catches papers that use different terminology but address the same problem
 
 ### 2c. Venue Mining
@@ -65,11 +67,15 @@ Group by methodology or approach type, not chronologically.
 
 Map what exists vs. what's missing:
 
-1. **Coverage matrix**: rows = problem aspects, columns = existing approaches
-2. **Empty cells** = potential gaps
+1. **Coverage table**: one row per approach, with the problem aspects it covers:
+   ```
+   | Approach | Representative Papers | Coverage | Gap? |
+   |----------|----------------------|----------|------|
+   ```
+2. **Rows marked Gap?** and aspects no approach covers = potential gaps
 3. For each candidate gap:
    - Search specifically for work filling this gap (it may exist under different terms)
-   - Check very recent papers (last 6 months) that might have addressed it
+   - Check very recent papers (last 6 months) on arXiv that might have addressed it
    - Assess whether the gap is meaningful (would filling it advance the field?)
 
 ## Step 5: Gap Validation
@@ -81,22 +87,35 @@ For each identified gap, verify it's real:
 - [ ] The gap is technically feasible to address
 - [ ] Filling the gap would be a meaningful contribution
 
-Rate confidence: HIGH (extensively searched, clearly missing), MEDIUM (searched but might have missed niche work), LOW (limited search, gap may exist elsewhere).
+Rate confidence: HIGH (every box above checked, clearly missing), MEDIUM (niche venues unchecked), LOW (limited search, gap may exist under different terminology).
 
 ## Step 6: Output Format
 
-Produce a structured research landscape:
+Produce a structured overview of the field. Title it `Gap Analysis: [Topic]` when the user asked for a gap analysis.
 
-1. **Topic summary** — 2-3 sentence overview of the research area
-2. **Paper table** — categorized list with year, venue, approach, results, code availability
-3. **Gap table** — identified gaps with confidence levels and evidence
-4. **Recommended readings** — top 5-10 most relevant papers for the user's specific work
-5. **Candidate citations** — BibTeX entries for papers worth citing (MUST verify against DBLP before presenting)
+```
+## Literature Research: [Topic]
+
+### Research Landscape
+[2-3 sentence overview of the research area]
+
+### Paper Table
+[Step 3 table: year, venue, approach, results, code availability]
+
+### Coverage Table
+[Step 4 table]
+
+### Identified Gaps
+| Gap | Confidence | Evidence of Absence | Why It Matters |
+|-----|-----------|---------------------|---------------|
+
+### Recommended Readings
+[Top 5-10 most relevant papers for the user's specific work]
+
+### Candidate Citations
+[BibTeX entries for papers worth citing, verified per Citation Integrity]
+```
 
 ## Citation Integrity
 
-Every paper mentioned must have verified metadata:
-- Author names: cross-check with DBLP or the paper's official page
-- Venue and year: confirm against the published version (not preprint)
-- Claims about results: only include numbers you can trace to a specific table/figure in the paper
-- If uncertain about any detail, flag it explicitly rather than guessing
+Verify every paper you mention with check 5 (Citations) in [paper-check](../paper-check/SKILL.md) before presenting it, including any result numbers you quote. Flag any detail you cannot confirm rather than guessing.

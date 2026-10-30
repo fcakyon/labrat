@@ -1,16 +1,4 @@
----
-name: research-publishing
-description: >
-  Use when the user wants to prepare code for open-source release,
-  create reproducible research artifacts, or structure a repository
-  for publication. Triggers on phrases like "publish code",
-  "open source release", "reproducibility", "research repository",
-  "code release", or "prepare for publication".
----
-
-# Research Publishing Methodology
-
-You are helping a researcher prepare their code and artifacts for public release alongside a paper submission.
+# Code Release Preparation
 
 ## Step 1: Repository Assessment
 
@@ -58,7 +46,7 @@ For each experiment in the paper:
 - [ ] Configuration file exists and matches paper's hyperparameters
 - [ ] Random seeds are set and documented
 - [ ] Training command is documented end-to-end
-- [ ] Evaluation command produces the reported numbers
+- [ ] Evaluation command produces the reported numbers (see check 6, Eval integrity, in [SKILL.md](../SKILL.md))
 - [ ] Data preprocessing steps are scripted (not manual)
 - [ ] Hardware requirements are documented (GPU type, memory, time)
 - [ ] Dependencies are version-pinned
@@ -86,7 +74,7 @@ Apply minimal, targeted cleanup:
 2. **Replace** hardcoded paths with configurable paths (env vars or args)
 3. **Add** docstrings to public functions (not internal helpers)
 4. **Ensure** the main entry points are clearly documented
-5. **Do NOT** refactor working code for style — it adds risk for no benefit
+5. **Do NOT** refactor working code for style. It adds risk for no benefit.
 
 ## Step 6: License Selection
 
@@ -109,7 +97,7 @@ Before publishing:
 1. Clone into a fresh directory
 2. Follow README installation steps exactly
 3. Run quick start commands
-4. Run evaluation to verify numbers match paper
+4. Rerun check 6 (Eval integrity) from [SKILL.md](../SKILL.md) on the fresh clone
 5. Check that no sensitive information is in git history
 
 ## Output Format

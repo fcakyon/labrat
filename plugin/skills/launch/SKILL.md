@@ -55,7 +55,7 @@ The run name will live in wandb / neptune / checkpoint dirs / status reports for
 - bad: `run-1`, `exp-b`, `final-v2`, `phase2-internal`
 - good: `imagenet-resnet50-bs256-lr0.1-cosine`, `coco-baseline-bs256-lr3e-4`, `swin-t-imagenet-distill-from-vit-l`
 
-The pattern: `<dataset/task>-<model>-<key-config>-<distinctive-recipe-piece>`. If you can't describe the experiment from the name in one sentence, the name is wrong. The Stop hook flags any run reference that uses session-local labels.
+The pattern: `<dataset/task>-<model>-<key-config>-<distinctive-recipe-piece>`. If you can't describe the experiment from the name in one sentence, the name is wrong.
 
 ### 3. Path verification
 

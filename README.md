@@ -14,7 +14,7 @@ PhD research. Every guardrail in this plugin traces to a real mistake.
 
 ---
 
-Paper search and acquisition use [Paper Search CLI](https://github.com/fcakyon/paper-search-cli), installed with uv and Python 3.10+. See [paper search setup](plugin/commands/setup.md#paper-search-when-needed). Other skills do not require it.
+Paper search and acquisition use [Paper Search CLI](https://github.com/fcakyon/paper-search-cli), installed with uv and Python 3.10+. See [paper search setup](plugin/skills/literature-research/references/paper-search.md). Other skills do not require it.
 
 ## Why This Plugin Exists
 
@@ -59,53 +59,29 @@ Notifications (task completion, background agents) forward to ntfy / Slack / ema
 
 ## What You Get
 
-### Commands
+### Skills (auto-trigger, or run as `/phd-skills:<skill>`)
 
-| Command                                                     | What it does                                               |
-| ----------------------------------------------------------- | ---------------------------------------------------------- |
-| [`/phd-skills:xray`](plugin/commands/xray.md)               | Audit paper against code and data (5 parallel dimensions)  |
-| [`/phd-skills:factcheck`](plugin/commands/factcheck.md)     | Verify BibTeX entries and cited claims against DBLP        |
-| [`/phd-skills:gaps <topic>`](plugin/commands/gaps.md)       | Literature gap analysis with web confirmation              |
-| [`/phd-skills:fortify [venue]`](plugin/commands/fortify.md) | Select strongest ablations + anticipate reviewer questions |
-| [`/phd-skills:setup`](plugin/commands/setup.md)             | Auto-detection tour + optional extras                      |
-| [`/phd-skills:help`](plugin/commands/help.md)               | Show all features at a glance                              |
-
-### Skills (auto-trigger, just describe what you need)
-
-| When you say...                                   | Skill activates                                                   |
-| ------------------------------------------------- | ----------------------------------------------------------------- |
-| "reproduce this arxiv paper"                      | [Reproduce](plugin/skills/reproduce/SKILL.md)                     |
-| "why is X failing / diverging / OOMing"           | [Debug](plugin/skills/debug/SKILL.md)                             |
-| "compare run A to baseline"                       | [Compare](plugin/skills/compare/SKILL.md)                         |
-| "launch a new training run" / "kick off training" | [Launch](plugin/skills/launch/SKILL.md)                           |
-| "design an ablation study"                        | [Experiment Design](plugin/skills/experiment-design/SKILL.md)     |
-| "find related papers on X"                        | [Literature Research](plugin/skills/literature-research/SKILL.md) |
-| "check if my numbers match the code"              | [Paper Verification](plugin/skills/paper-verification/SKILL.md)   |
-| "review my methods section for consistency"       | [Paper Writing](plugin/skills/paper-writing/SKILL.md)             |
-| "analyze dataset bias"                            | [Dataset Curation](plugin/skills/dataset-curation/SKILL.md)       |
-| "prepare code for open-source release"            | [Research Publishing](plugin/skills/research-publishing/SKILL.md) |
-| "what will reviewers ask about this?"             | [Reviewer Defense](plugin/skills/reviewer-defense/SKILL.md)       |
-| "setup latex for CVPR"                            | [LaTeX Setup](plugin/skills/latex-setup/SKILL.md)                 |
-
-### Agents (Claude delegates automatically)
-
-| Agent                                                         | What it does                                                         | Special                                                       |
-| ------------------------------------------------------------- | -------------------------------------------------------------------- | ------------------------------------------------------------- |
-| [`paper-auditor`](plugin/agents/paper-auditor.md)             | Cross-checks paper claims vs code and data                           | Runs in isolated worktree, remembers patterns across sessions |
-| [`experiment-analyzer`](plugin/agents/experiment-analyzer.md) | Analyzes results from wandb / neptune / tensorboard / mlflow / local | Hands off to `compare` and `debug` skills for discipline      |
+| When you say...                                                       | Skill activates                                                   |
+| --------------------------------------------------------------------- | ----------------------------------------------------------------- |
+| "find related papers on X" / "find gaps in the literature on X"       | [Literature Research](plugin/skills/literature-research/SKILL.md) |
+| "reproduce this arxiv paper"                                          | [Reproduce](plugin/skills/reproduce/SKILL.md)                     |
+| "design an ablation study"                                            | [Experiment Design](plugin/skills/experiment-design/SKILL.md)     |
+| "launch a new training run" / "kick off training"                     | [Launch](plugin/skills/launch/SKILL.md)                           |
+| "why is X failing / diverging / OOMing"                               | [Debug](plugin/skills/debug/SKILL.md)                             |
+| "compare run A to baseline"                                           | [Compare](plugin/skills/compare/SKILL.md)                         |
+| "analyze dataset bias"                                                | [Dataset Curation](plugin/skills/dataset-curation/SKILL.md)       |
+| "check if my numbers match the code" / "verify my BibTeX" / "prepare code for release" | [Paper Check](plugin/skills/paper-check/SKILL.md) |
+| "review my methods section for consistency" / "setup latex for CVPR"  | [Paper Write](plugin/skills/paper-write/SKILL.md)                 |
+| "what will reviewers ask about this?" / "pick my strongest ablations" | [Rebuttal](plugin/skills/rebuttal/SKILL.md)                       |
+| `/phd-skills:setup`                                                   | [Setup](plugin/skills/setup/SKILL.md)                             |
 
 ### Research Guardrails (run silently, you never invoke these)
 
-| What it catches                                                                                                              |
-| ---------------------------------------------------------------------------------------------------------------------------- |
-| [Conclusions reviewed against actual artifacts by a fresh-context research peer](plugin/hooks/prompts/stop_research_peer.md) |
-| [In-place edits to git-tracked source over SSH](plugin/scripts/remote_inplace_edit_guard.sh)                                 |
-| [Project-internal jargon shapes in commits and docs](plugin/scripts/jargon_scrub.sh)                                         |
-| [Timezone tokens that do not match the system clock](plugin/scripts/timezone_scrub.sh)                                       |
-| [Pointer to the launch skill when an ML training job starts](plugin/scripts/launch_context.sh)                               |
-| [LaTeX compilation errors after .tex edits](plugin/scripts/latex_check.sh)                                                   |
-| [Unreviewed generated images/figures](plugin/scripts/visual_check.sh)                                                        |
-| [Research state loss before context overflow](plugin/scripts/save_state.sh)                                                  |
+| What it catches                                                                                           |
+| --------------------------------------------------------------------------------------------------------- |
+| [Conclusions reviewed against actual artifacts by a fresh-context research peer](plugin/hooks/hooks.json) |
+| [In-place edits to git-tracked source over SSH](plugin/scripts/remote_inplace_edit_guard.sh)              |
+| [Pointer to the launch skill when an ML training job starts](plugin/scripts/launch_context.sh)            |
 
 ---
 
@@ -113,10 +89,10 @@ Notifications (task completion, background agents) forward to ntfy / Slack / ema
 
 |                                           | phd-skills                  | flonat/claude-research       | Others       |
 | ----------------------------------------- | --------------------------- | ---------------------------- | ------------ |
-| Commands to learn                         | 6                           | 39                           | 13-20        |
-| Research integrity hooks                  | 8 (agent + 7 auto-detect)   | 1                            | 0            |
+| Commands to learn                         | 1 (skills auto-trigger)     | 39                           | 13-20        |
+| Research integrity hooks                  | 3 (agent + 2 command hooks) | 1                            | 0            |
 | Paper reproduction (arxiv to runs)        | **Yes** (7-stage skill)     | No                           | No           |
-| Paper-code consistency audit              | 5-dimension parallel        | Read-only, no code cross-ref | None         |
+| Paper-code consistency audit              | 6 checks                    | Read-only, no code cross-ref | None         |
 | Experiment monitoring + SSH notifications | Yes (ntfy / slack / email)  | No                           | No           |
 | External dependencies                     | **Paper Search CLI for paper workflows**                    | npm + pip + MCP servers      | MCP required |
 | Install time                              | 30 seconds                  | 10+ minutes                  | Varies       |
