@@ -5,7 +5,7 @@ description: Pre-flight checklist for long-running ML training jobs covering con
 
 # Launch: pre-flight checklist for long ML training jobs
 
-Long training jobs are expensive to fail. A 12-hour run that crashes on epoch 3 from a missing dataset path or a default `workers=8` against an NFS mount is a full day lost. This skill walks five quick checks before you commit the GPUs.
+Long training jobs are expensive to fail. A 12-hour run that crashes on epoch 3 from a missing dataset path or a default `workers=8` against an NFS mount is a full day lost. This skill walks six quick checks before you commit the GPUs.
 
 The agentic Stop hook in this plugin will route here from `reason` when an assistant tries to launch a run without going through the checklist.
 
@@ -93,6 +93,17 @@ Confirm the run will appear under the right project / entity / experiment-name. 
 
 Estimate wall-clock duration: `epochs × seconds-per-epoch / 3600 = hours`. State the ETA in your local TZ (the system's TZ). If the run will straddle a meeting / sleep / OOO window, decide whether to defer or split.
 
+### 6. Code matches a pushed commit
+
+On the machine that runs the job, in the repo it runs from:
+
+```bash
+git status --porcelain            # must print nothing
+git fetch -q && git rev-parse HEAD @{u}   # both hashes must match
+```
+
+Uncommitted or unpushed changes mean nobody can tell later which code produced the run. If either check fails, edit locally, commit, push, and `git pull` on the host before launching. Record the commit hash with the run.
+
 ## Restart and kill cleanup
 
 If this is a restart of a previously-failed run, or a kill before launching a replacement, purge stale artifacts in this exact order:
@@ -106,6 +117,6 @@ Skipping any of these creates ghost state that will confuse the next launch or t
 
 ## Output
 
-When the user invokes this skill, walk the five checks (or three checks + cleanup, if killing) and report which passed and which failed. Block the launch on any failure unless the user explicitly waives the check.
+When the user invokes this skill, walk the six checks (or three checks + cleanup, if killing) and report which passed and which failed. Block the launch on any failure unless the user explicitly waives the check.
 
 For a clean launch, end with the launch command itself in a fenced block, ready to copy.

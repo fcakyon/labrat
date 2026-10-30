@@ -80,7 +80,6 @@ Notifications (task completion, background agents) forward to ntfy / Slack / ema
 | What it catches                                                                                           |
 | --------------------------------------------------------------------------------------------------------- |
 | [Conclusions reviewed against actual artifacts by a fresh-context research peer](plugin/hooks/hooks.json) |
-| [In-place edits to git-tracked source over SSH](plugin/scripts/remote_inplace_edit_guard.sh)              |
 | [Pointer to the launch skill when an ML training job starts](plugin/scripts/launch_context.sh)            |
 
 ---
@@ -90,7 +89,7 @@ Notifications (task completion, background agents) forward to ntfy / Slack / ema
 |                                           | phd-skills                  | flonat/claude-research       | Others       |
 | ----------------------------------------- | --------------------------- | ---------------------------- | ------------ |
 | Commands to learn                         | 1 (skills auto-trigger)     | 39                           | 13-20        |
-| Research integrity hooks                  | 3 (agent + 2 command hooks) | 1                            | 0            |
+| Research integrity hooks                  | 2 (agent + 1 command hook)  | 1                            | 0            |
 | Paper reproduction (arxiv to runs)        | **Yes** (7-stage skill)     | No                           | No           |
 | Paper-code consistency audit              | 6 checks                    | Read-only, no code cross-ref | None         |
 | Experiment monitoring + SSH notifications | Yes (ntfy / slack / email)  | No                           | No           |

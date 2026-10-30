@@ -127,6 +127,8 @@ Present the following research integrity rules to add to the project's CLAUDE.md
   add unrequested sections, or "improve" surrounding text unless asked.
 - Citation integrity: verify author names, venue, and year against DBLP before adding or
   modifying any BibTeX entry. Flag any citation detail you cannot verify.
+- Edit code locally, commit, push, then `git pull` on the GPU host. Never edit tracked code
+  in place over SSH.
 ```
 
 Ask the user to confirm, then:
