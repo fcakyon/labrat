@@ -30,7 +30,7 @@ Manually visit `https://paperswithcode.com/paper/<paper-slug>`. PWC often lists 
 ### 1. Shallow clone
 
 ```bash
-cd repro/ < arxiv-id > /
+cd repro/<arxiv-id>/
 git clone --depth 1 < repo-url > code/
 ```
 

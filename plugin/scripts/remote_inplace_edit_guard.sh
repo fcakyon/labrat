@@ -11,8 +11,9 @@ input=$(cat)
 command=$(echo "$input" | jq -r '.tool_input.command // empty' 2> /dev/null)
 [ -z "$command" ] && exit 0
 
-# Only fire on ssh-prefixed commands
-echo "$command" | grep -qE 'ssh\s+[A-Za-z0-9_.-]+' || exit 0
+# Only the quoted command after ssh runs remotely; ssh host 'cmd' > out.json saves locally
+remote=$(echo "$command" | tr '\n' ' ' | grep -oE '\bssh\s+.*' | grep -oE "'[^']*'|\"[^\"]*\"")
+[ -z "$remote" ] && exit 0
 
 ext='py|yaml|yml|toml|json|md|sh|rs|go|ts|tsx|js|jsx|c|cpp|h|hpp|java|rb|R'
 # A source-file path ending: one of the extensions then a word boundary, so
@@ -35,10 +36,10 @@ EOF
 }
 
 # sed -i mutates an existing file in place: always divergent, block regardless of path
-echo "$command" | grep -qE "sed\s+-i[a-zA-Z]*\s+[^|&;]*$extm" && block
+echo "$remote" | grep -qE "sed\s+-i[a-zA-Z]*\s+[^|&;]*$extm" && block
 
 # Create/overwrite/append shapes (redirect, tee): collect only their target paths
-targets=$(echo "$command" | grep -oE "(>>?\s*|tee\s+(-a\s+)?)[^ |&;<>]*$extm" 2> /dev/null)
+targets=$(echo "$remote" | grep -oE "(>>?\s*|tee\s+(-a\s+)?)[^ |&;<>]*$extm" 2> /dev/null)
 [ -z "$targets" ] && exit 0
 
 # Block only if at least one target is NOT a temp/scratch path

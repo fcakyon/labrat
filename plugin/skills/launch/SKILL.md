@@ -52,8 +52,8 @@ If no reference exists in this project, ask the user to point at one. Do not lau
 
 The run name will live in wandb / neptune / checkpoint dirs / status reports for the rest of its life. It must describe the experiment in plain English without internal codes:
 
-- bad: `run-1`, `wave-2`, `cs-ad`, `phase2-internal`
-- good: `7src-fastvit-s-featmap-mlp-dinov3`, `coco-baseline-bs256-lr3e-4`, `swin-t-imagenet-distill-from-vit-l`
+- bad: `run-1`, `exp-b`, `final-v2`, `phase2-internal`
+- good: `imagenet-resnet50-bs256-lr0.1-cosine`, `coco-baseline-bs256-lr3e-4`, `swin-t-imagenet-distill-from-vit-l`
 
 The pattern: `<dataset/task>-<model>-<key-config>-<distinctive-recipe-piece>`. If you can't describe the experiment from the name in one sentence, the name is wrong. The Stop hook flags any run reference that uses session-local labels.
 
@@ -75,7 +75,7 @@ ls -la /path/to/runs/
 cat configs/intended.yaml | head
 ```
 
-Never trust a path that was recalled from memory. The `destructive_path_guard.sh` hook will already block obvious cases for `rm`/`mv`, but the launch path needs the same scrutiny, a run started with a nonexistent dataset path crashes 30 minutes in instead of immediately.
+Never trust a path that was recalled from memory. A run started with a nonexistent dataset path crashes 30 minutes in instead of immediately.
 
 ### 4. Monitoring setup
 
@@ -91,13 +91,13 @@ Confirm the run will appear under the right project / entity / experiment-name. 
 
 ### 5. ETA in your local timezone
 
-Estimate wall-clock duration: `epochs × seconds-per-epoch / 3600 = hours`. State the ETA in your local TZ (the system's TZ, which the `timezone_scrub.sh` hook validates against). If the run will straddle a meeting / sleep / OOO window, decide whether to defer or split.
+Estimate wall-clock duration: `epochs × seconds-per-epoch / 3600 = hours`. State the ETA in your local TZ (the system's TZ). If the run will straddle a meeting / sleep / OOO window, decide whether to defer or split.
 
 ## Restart and kill cleanup
 
 If this is a restart of a previously-failed run, or a kill before launching a replacement, purge stale artifacts in this exact order:
 
-1. **Local checkpoint dir** on the launching machine: `rm -rf /local/runs/<run-name>` (verify path first; the `destructive_path_guard.sh` will warn).
+1. **Local checkpoint dir** on the launching machine: `rm -rf /local/runs/<run-name>` (verify path first).
 2. **Remote artifact dir** on the cluster / NFS / object store: `rm -rf /remote/runs/<run-name>` (or equivalent).
 3. **Experiment tracker run**: delete via the tracker's API (`wandb api.run(...).delete()`, neptune `run.stop() + delete via UI`, etc.). Stale tracker runs corrupt later comparisons.
 4. **Scheduler reservation**: cancel the SLURM job (`scancel <jobid>`), the lambda labs reservation, the cron entry, etc. Runs that "killed but the GPUs are still allocated" are a recurring waste.

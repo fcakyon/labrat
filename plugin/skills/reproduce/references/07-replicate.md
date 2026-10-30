@@ -25,7 +25,7 @@ Every full run goes through `/phd-skills:launch` first. The checklist will:
 - diff your config against the previous reference run
 - verify dataset and checkpoint paths
 - confirm monitoring is set up (wandb tags scoped to this reproduction)
-- verify the run name has no internal jargon (use `repro-main-seed0`, not `wave-1`)
+- verify the run name has no internal jargon (use `repro-main-seed0`, not `final-try`)
 - record an ETA in your local timezone
 
 Do not skip the checklist for "small" runs. The hooks will warn anyway.

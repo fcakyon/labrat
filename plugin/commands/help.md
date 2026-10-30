@@ -40,7 +40,6 @@ ACTIVE GUARDRAILS (run silently)
   Stop hook              Checks for unverified claims, wrong targets, scope creep,
                          dropped requests, assumptions stated as facts
   Ambiguity guard        Confirms interpretation of short/ambiguous messages
-  Citation guard         Reminds to verify citations when editing .tex/.bib files
   LaTeX auto-compile     Compiles .tex after edits, catches errors early
   Visual inspection      Reminds to inspect generated images/plots
   State preservation     Saves research context before context overflow
