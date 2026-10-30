@@ -85,7 +85,7 @@ Be honest. Reproductions that find gaps are more valuable than reproductions tha
 
 In `results.md`, cite which skills were used at each stage:
 
-> Implementation gaps tracked in `gaps_filled.md` and verified via the `paper-verification` skill (round-trip checked 2026-04-30).
+> Implementation gaps tracked in `gaps_filled.md` and verified via the `/phd-skills:paper-check` skill (round-trip checked 2026-04-30).
 > Smoke runs ran clean per `/phd-skills:reproduce` stage 6.
 > Replication runs launched via `/phd-skills:launch` checklist (logs in `launch_logs/`).
 > Numerical comparison aligned via `/phd-skills:compare` at paper's reported epochs.

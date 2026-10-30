@@ -12,7 +12,7 @@ Fetch the paper into a structured local extract before doing anything else. Work
 
 ### 1. Fetch the paper with Paper Search CLI
 
-Use [fcakyon/paper-search-cli](https://github.com/fcakyon/paper-search-cli). Follow the paper search section of [setup](../../../commands/setup.md) if the command is missing.
+Use [fcakyon/paper-search-cli](https://github.com/fcakyon/paper-search-cli). Follow [paper search setup](../../literature-research/references/paper-search.md) if the command is missing.
 
 For an arXiv paper, keep the supplied version suffix so the PDF matches the user's reference:
 

@@ -1,6 +1,6 @@
 ---
 name: compare
-description: Same-epoch comparison of training runs across wandb, neptune, tensorboard, or mlflow. Aligns runs at the student's current step (never current-vs-final-of-baseline) and separates proxy metrics from downstream targets. Use when the user asks to compare runs, check if a run is improving, track lag against a baseline, rank experiments, or evaluate run-vs-run performance.
+description: Same-epoch comparison and analysis of training runs across wandb, neptune, tensorboard, mlflow, or local result files. Aligns runs at the student's current step (never current-vs-final-of-baseline) and separates proxy metrics from downstream targets. Also writes run summaries and experiment reports, analyzes ablations, and monitors training. Use when the user asks to compare runs, check if a run is improving, track lag against a baseline, rank experiments, evaluate run-vs-run performance, analyze results, write a training report or experiment summary, summarize training results, monitor training, or asks which run is best.
 ---
 
 # Compare: same-epoch run comparison across trackers
@@ -9,25 +9,17 @@ The most common comparison error is reporting "run A is 4 percentage points behi
 
 The agentic Stop hook routes here from `reason` when an assistant reports a delta without aligning the runs.
 
-## When to run
-
-The user just said any of:
-
-- "compare run A to baseline / to run B"
-- "is my run improving / catching up / falling behind"
-- "rank these experiments"
-- "X vs Y wandb / neptune"
-- "track lag against baseline"
+If the question is "why did X fail / diverge / underperform", go to `/phd-skills:debug` first.
 
 ## Auto-detect the tracker
 
 Check in this order:
 
-1. `WANDB_API_KEY` env var set, or `wandb` imports in the project → **wandb**
-2. `NEPTUNE_API_TOKEN` env var set → **neptune**
+1. `WANDB_API_KEY` env var set, or `wandb` imports or a `*.yaml` config with wandb keys in the project → **wandb**
+2. `NEPTUNE_API_TOKEN` env var set, or a `*.yaml` config with neptune keys → **neptune**
 3. `MLFLOW_TRACKING_URI` env var set, or `mlruns/` dir present → **mlflow**
 4. `runs/` or `lightning_logs/` dir present → **tensorboard**
-5. `*results*.json` / `*meta*.json` files in run dirs → **local file format**
+5. `*results*.json` / `*meta*.json` / `eval*.csv` files in run dirs → **local file format**: read one sample file and write the analysis code for that format, not a hardcoded script
 
 If none, ask the user where metrics live before guessing.
 
@@ -100,3 +92,70 @@ In every line of the report, use full run names. Never `run-a vs run-b`; always 
 ## Output
 
 Compact comparison table per metric pair (proxy + downstream). Each row aligned at the student's current step. Each cell traceable to a specific tracker run-id and step. End with one or two sentences interpreting the comparison, `student is on track to catch up at step N, projected from current slope` is a useful framing; `student is winning / losing` is rarely warranted before convergence.
+
+## Beyond two runs: ranking, reports, ablations, monitoring
+
+### Ranking many runs
+
+Compare runs across more than the primary metric:
+
+- Primary metrics (accuracy, F1, loss)
+- Training dynamics (convergence speed, stability)
+- Resource usage (GPU hours, memory, cost)
+- Hyperparameter differences
+
+Put them in the Results Table of the experiment report below, and identify:
+
+- Best overall run
+- Best run per metric
+- Most efficient run (best metric per GPU hour)
+- Runs that crashed or had anomalies
+
+### Ablation analysis
+
+1. Identify the baseline run
+2. For each ablation, compute the delta from baseline
+3. Rank by impact magnitude
+4. Check for interaction effects (A+B != A + B individually)
+5. To choose which ablations go in the paper, hand these deltas to Ablation Selection in `/phd-skills:rebuttal`
+
+### Experiment report
+
+When the user asks for a report or summary:
+
+```
+## Experiment Report
+
+### Overview
+- Total runs: N
+- Date range: start to end
+- Best result: [metric] = [value] (run [name])
+
+### Results Table
+| Run | Step | Config Diff | Proxy | Downstream | GPU Hours | Status |
+|-----|------|-------------|-------|------------|-----------|--------|
+
+### Key Findings
+1. [Finding with evidence]
+2. [Finding with evidence]
+
+### Recommendations
+1. [Next experiment to try, with justification]
+```
+
+Align every Results Table row at the same step and keep proxy and downstream apart, as in Output above.
+
+### Training monitoring
+
+Set up periodic monitoring:
+
+- Check if training is still running (GPU utilization, log freshness)
+- Track metric progression
+- Alert on anomalies (loss spike, NaN, OOM)
+- Notify when training completes
+
+Create a CronCreate job on `*/10 * * * *` that pipes a `{"title", "message"}` JSON object to the plugin notifier, which forwards it to whatever `/phd-skills:setup` configured (ntfy, Slack or email):
+
+```bash
+echo "{\"title\": \"Training check\", \"message\": \"GPU util: $(nvidia-smi --query-gpu=utilization.gpu --format=csv,noheader)\"}" | ${CLAUDE_PLUGIN_ROOT}/scripts/notify.sh
+```

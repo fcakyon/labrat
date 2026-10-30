@@ -52,7 +52,7 @@ This keeps reproductions self-contained and easy to revisit later.
 
 ## Cross-references
 
-- After stage 3, hand the gap analysis off to the `paper-verification` skill for a round-trip check ("did I really capture every hyperparam the paper mentions").
+- After stage 3, hand the gap analysis off to the `/phd-skills:paper-check` skill for a round-trip check ("did I really capture every hyperparam the paper mentions").
 - Stage 4 implementation should be committed in small, reviewable pieces: each commit references the paper section that justified the filled value.
 - Stage 6 smoke failures route to the `/phd-skills:debug` skill, not to ad-hoc fixes.
 - Stage 7 launches go through the `/phd-skills:launch` checklist before any multi-hour run.
