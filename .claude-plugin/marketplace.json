@@ -5,18 +5,19 @@
     "url": "https://scholar.google.com/citations?user=RHGyDE0AAAAJ"
   },
   "metadata": {
-    "description": "Catch AI mistakes before they cost weeks of compute. Reproduce papers from arxiv. Debug runs evidence-first. Compare experiments at the right epoch. Launch with discipline."
+    "description": "Lab Rat: catch AI mistakes before they cost weeks of compute. Reproduce papers from arxiv. Debug runs evidence-first. Compare experiments at the right epoch. Launch with discipline."
   },
   "plugins": [
     {
       "name": "phd-skills",
+      "displayName": "Lab Rat",
       "source": {
         "source": "git-subdir",
         "url": "https://github.com/fcakyon/phd-skills.git",
         "path": "plugin"
       },
-      "description": "Catch AI mistakes before they cost weeks of compute. Reproduce papers from arxiv. Debug runs evidence-first. Compare experiments at the right epoch. Launch with discipline.",
-      "version": "1.5.0",
+      "description": "Lab Rat: catch AI mistakes before they cost weeks of compute. Reproduce papers from arxiv. Debug runs evidence-first. Compare experiments at the right epoch. Launch with discipline.",
+      "version": "1.6.0",
       "author": {
         "name": "Fatih Cagatay Akyon"
       },

@@ -1,4 +1,6 @@
-# phd-skills
+<p align="center"><img src="assets/labrat.svg" alt="Lab Rat logo" width="120"></p>
+
+# Lab Rat
 
 Catch AI mistakes before they cost weeks of compute. Reproduce papers from arxiv. Debug runs evidence-first. Compare experiments at the right epoch. Launch with discipline.
 
@@ -86,7 +88,7 @@ Notifications (task completion, background agents) forward to ntfy / Slack / ema
 
 ## How It Compares
 
-|                                           | phd-skills                  | flonat/claude-research       | Others       |
+|                                           | Lab Rat                     | flonat/claude-research       | Others       |
 | ----------------------------------------- | --------------------------- | ---------------------------- | ------------ |
 | Commands to learn                         | 1 (skills auto-trigger)     | 39                           | 13-20        |
 | Research integrity hooks                  | 2 (agent + 1 command hook)  | 1                            | 0            |
