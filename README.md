@@ -8,6 +8,15 @@
 
 Lab Rat teaches your AI coding agent to work like a careful ML researcher: reproduce papers, launch and compare runs at the same epoch, and check every claim before it costs you weeks of compute.
 
+<p align="center">
+  <a href="#install">
+    <picture>
+      <source media="(prefers-color-scheme: dark)" srcset="assets/tools-dark.svg" />
+      <img src="assets/tools-light.svg" alt="Works in Claude Code, Codex, Cursor and Gemini CLI" width="454" height="24" />
+    </picture>
+  </a>
+</p>
+
 Built by [Fatih Cagatay Akyon](https://scholar.google.com/citations?user=RHGyDE0AAAAJ) (2000+ citations, 5 patents) from 2200+ Claude Code and Codex sessions. Every guardrail traces to a real mistake.
 
 <picture>
@@ -17,31 +26,54 @@ Built by [Fatih Cagatay Akyon](https://scholar.google.com/citations?user=RHGyDE0
 
 ## Install
 
-**Claude Code**
+<details open>
+<summary><b>Claude Code</b></summary>
 
 ```sh
 claude plugin marketplace add fcakyon/labrat
 claude plugin install labrat@labrat
 ```
 
+Update with `claude plugin update labrat@labrat`.
+
 Coming from phd-skills? Remove it first with `claude plugin uninstall phd-skills@phd-skills` and `claude plugin marketplace remove phd-skills`.
 
-**Codex**
+</details>
+
+<details>
+<summary><b>Claude.ai and Claude Desktop</b></summary>
+
+Open **Customize**, then **Plugins**. Select **Add**, then **Add marketplace**, choose **Add from a repository** and enter `fcakyon/labrat`. Install Lab Rat from the **Discover** tab.
+
+Needs a paid plan. Chat runs the skills. The plugin also syncs to Claude Code when you sign in there with the same account.
+
+</details>
+
+<details>
+<summary><b>Codex</b></summary>
 
 ```sh
 codex plugin marketplace add fcakyon/labrat
 codex plugin add labrat@labrat
 ```
 
-**Cursor**
+Update with `codex plugin marketplace upgrade labrat`.
+
+</details>
+
+<details>
+<summary><b>Cursor</b></summary>
 
 ```sh
 cursor-agent plugin marketplace add https://github.com/fcakyon/labrat
 ```
 
-Then start `cursor-agent`, enter `/plugin` and install Lab Rat.
+Then start `cursor-agent`, enter `/plugin` and install Lab Rat. To update, run `cursor-agent plugin marketplace remove labrat`, add it again and reinstall.
 
-**Gemini CLI**
+</details>
+
+<details>
+<summary><b>Gemini CLI</b></summary>
 
 ```sh
 git clone https://github.com/fcakyon/labrat ~/.labrat
@@ -50,7 +82,9 @@ gemini extensions link ~/.labrat/plugin
 
 Update with `git -C ~/.labrat pull`.
 
-All four tools get the same 11 skills. The guardrail hooks run in Claude Code only.
+</details>
+
+Every option gets the same 11 skills. The guardrail hooks run in Claude Code only.
 
 Paper search and acquisition use [Paper Search CLI](https://github.com/fcakyon/paper-search-cli), installed with uv and Python 3.10+. See [paper search setup](plugin/skills/literature-research/references/paper-search.md). Other skills do not require it.
 
