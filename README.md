@@ -84,90 +84,54 @@ Update with `git -C ~/.labrat pull`.
 
 </details>
 
-Every option gets the same 11 skills. The guardrail hooks run in Claude Code only.
+Every tool gets the same 11 skills. The two guardrail hooks run in Claude Code only. Paper search needs [Paper Search CLI](https://github.com/fcakyon/paper-search-cli) (uv, Python 3.10+, [setup](plugin/skills/literature-research/references/paper-search.md)), nothing else does. Optional: `/labrat:setup` shows what it detected and turns on extras like notifications to ntfy, Slack or email, the command allowlist and LaTeX.
 
-Paper search and acquisition use [Paper Search CLI](https://github.com/fcakyon/paper-search-cli), installed with uv and Python 3.10+. See [paper search setup](plugin/skills/literature-research/references/paper-search.md). Other skills do not require it.
-
-The plugin works correctly the moment it is installed. Optional: run `/labrat:setup` for a 30-second tour of what was auto-detected and to opt into extras (notifications, allowlist, LaTeX).
-
-## Usage
-
-Open Claude Code in your project directory, then:
-
-- `/labrat:reproduce arxiv 2508.12345` reproduce a paper from arxiv URL through replication runs
-- `"why is my loss diverging?"` the `debug` skill auto-triggers, runs evidence-first probes
-- `"compare run alpha to baseline"` the `compare` skill auto-triggers, aligns at the same epoch
-- `"launch the new training run"` the `launch` skill auto-triggers, runs the pre-flight checklist
-- `/loop 30m check experiment logs, notify me if metrics beat the baseline or if loss starts to diverge`
-
-Notifications (task completion, background agents) forward to ntfy / Slack / email after `/labrat:setup`.
-
-## Why This Plugin Exists
+## Why
 
 AI agents make research mistakes that cost weeks of compute. Real ones from my sessions:
 
-- It typed "done?" as "dont?" and launched an unwanted upload of thousands of files
-- It restarted a 50-hour training job without diffing the config against the reference run, lost three days
-- It killed an experiment over a non-converged proxy metric, before downstream eval would have shown the truth
-- It ran `rm -rf` on a path it had hallucinated from memory, lost local checkpoints
+- It read "done?" as "dont?" and started uploading thousands of files.
+- It restarted a 50-hour training job without diffing the config against the reference run. Three days lost.
+- It killed an experiment over a proxy metric that had not converged, before the downstream eval could show the real result.
+- It ran `rm -rf` on a path it remembered wrong and deleted local checkpoints.
 
-Other plugins give you more commands. **This plugin gives you guardrails.**
+The skills teach the method, not a script, so the agent writes code for your setup (wandb, neptune, local files) and stops to check the evidence before it claims a result.
 
-## What You Get
+## Skills
 
-### Skills (auto-trigger, or run as `/labrat:<skill>`)
+A skill starts when you describe its task, or run it as `/labrat:<skill>`.
 
-| When you say...                                                       | Skill activates                                                   |
-| --------------------------------------------------------------------- | ----------------------------------------------------------------- |
-| "find related papers on X" / "find gaps in the literature on X"       | [Literature Research](plugin/skills/literature-research/SKILL.md) |
-| "reproduce this arxiv paper"                                          | [Reproduce](plugin/skills/reproduce/SKILL.md)                     |
-| "design an ablation study"                                            | [Experiment Design](plugin/skills/experiment-design/SKILL.md)     |
-| "launch a new training run" / "kick off training"                     | [Launch](plugin/skills/launch/SKILL.md)                           |
-| "why is X failing / diverging / OOMing"                               | [Debug](plugin/skills/debug/SKILL.md)                             |
-| "compare run A to baseline"                                           | [Compare](plugin/skills/compare/SKILL.md)                         |
-| "analyze dataset bias"                                                | [Dataset Curation](plugin/skills/dataset-curation/SKILL.md)       |
-| "check if my numbers match the code" / "verify my BibTeX" / "prepare code for release" | [Paper Check](plugin/skills/paper-check/SKILL.md) |
-| "review my methods section for consistency" / "setup latex for CVPR"  | [Paper Write](plugin/skills/paper-write/SKILL.md)                 |
-| "what will reviewers ask about this?" / "pick my strongest ablations" | [Rebuttal](plugin/skills/rebuttal/SKILL.md)                       |
-| `/labrat:setup`                                                   | [Setup](plugin/skills/setup/SKILL.md)                             |
+| Say | Skill |
+| --- | --- |
+| "find related papers on X", "find gaps in the literature on X" | [literature-research](plugin/skills/literature-research/SKILL.md) |
+| `/labrat:reproduce arxiv 2508.12345` | [reproduce](plugin/skills/reproduce/SKILL.md), from the paper to replication runs |
+| "design an ablation study" | [experiment-design](plugin/skills/experiment-design/SKILL.md) |
+| "launch the new training run" | [launch](plugin/skills/launch/SKILL.md), with a pre-flight checklist |
+| "why is my loss diverging?" | [debug](plugin/skills/debug/SKILL.md), evidence before fixes |
+| "compare run alpha to baseline" | [compare](plugin/skills/compare/SKILL.md), at the same epoch |
+| "analyze dataset bias" | [dataset-curation](plugin/skills/dataset-curation/SKILL.md) |
+| "check my numbers match the code", "verify my BibTeX", "prepare code for release" | [paper-check](plugin/skills/paper-check/SKILL.md) |
+| "review my methods section", "set up LaTeX for CVPR" | [paper-write](plugin/skills/paper-write/SKILL.md) |
+| "what will reviewers ask?", "pick my strongest ablations" | [rebuttal](plugin/skills/rebuttal/SKILL.md) |
+| `/labrat:setup` | [setup](plugin/skills/setup/SKILL.md) |
 
-### Research Guardrails (run silently, you never invoke these)
+In Claude Code, two [hooks](plugin/hooks/claude-hooks.json) run on their own: a fresh-context research peer checks each conclusion against the actual artifacts, and a [launch hook](plugin/scripts/launch_context.sh) points the agent to the launch skill when a training job starts.
 
-| What it catches                                                                                           |
-| --------------------------------------------------------------------------------------------------------- |
-| [Conclusions reviewed against actual artifacts by a fresh-context research peer](plugin/hooks/claude-hooks.json) |
-| [Pointer to the launch skill when an ML training job starts](plugin/scripts/launch_context.sh)            |
+For long runs, pair it with `/loop 30m check experiment logs, notify me if metrics beat the baseline or if loss starts to diverge`.
 
-## How It Compares
+## Star history
 
-|                                           | Lab Rat                     | flonat/claude-research       | Others       |
-| ----------------------------------------- | --------------------------- | ---------------------------- | ------------ |
-| Commands to learn                         | 1 (skills auto-trigger)     | 39                           | 13-20        |
-| Research integrity hooks                  | 2 (agent + 1 command hook)  | 1                            | 0            |
-| Paper reproduction (arxiv to runs)        | **Yes** (7-stage skill)     | No                           | No           |
-| Paper-code consistency audit              | 6 checks                    | Read-only, no code cross-ref | None         |
-| Experiment monitoring + SSH notifications | Yes (ntfy / slack / email)  | No                           | No           |
-| External dependencies                     | **Paper Search CLI for paper workflows**                    | npm + pip + MCP servers      | MCP required |
-| Install time                              | 30 seconds                  | 10+ minutes                  | Varies       |
-
-## Design Principles
-
-1. **Methodology over scripts**. Skills teach the approach, Claude generates code for your specific setup (wandb, neptune, local files, whatever)
-2. **Human oversight first**. Claude makes premature claims and jumps to conclusions. Every skill builds in verification checkpoints
-3. **Actionable output**. Ranked suggestions with specific fixes, never just a list of findings
-
-## License
-
-MIT. Use it, fork it, adapt it to your research.
-
-## Thank you for the support!
-
-[![Star History Chart](https://api.star-history.com/svg?repos=fcakyon/labrat&type=Date)](https://www.star-history.com/#fcakyon/labrat&Date)
+<a href="https://www.star-history.com/#fcakyon/labrat&Date">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=fcakyon/labrat&type=Date&theme=dark" />
+    <img alt="Lab Rat star history" src="https://api.star-history.com/svg?repos=fcakyon/labrat&type=Date" />
+  </picture>
+</a>
 
 ## Contributors
 
-<p align="center">
-    <a href="https://github.com/fcakyon/labrat/graphs/contributors">
-      <img src="https://contrib.rocks/image?repo=fcakyon/labrat" />
-    </a>
-</p>
+<a href="https://github.com/fcakyon/labrat/graphs/contributors">
+  <img alt="Contributors" src="https://contrib.rocks/image?repo=fcakyon/labrat" />
+</a>
+
+MIT license.
