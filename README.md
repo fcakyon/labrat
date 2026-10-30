@@ -11,7 +11,6 @@ PhD research. Every guardrail in this plugin traces to a real mistake.
 
 ![Claude Code Plugin](https://img.shields.io/badge/Claude_Code-Plugin-blue)
 ![MIT License](https://img.shields.io/badge/License-MIT-green)
-![Zero Dependencies](https://img.shields.io/badge/Dependencies-Zero-brightgreen)
 ![No MCP Required](https://img.shields.io/badge/MCP-Not_Required-lightgrey)
 
 ---
