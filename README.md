@@ -102,7 +102,7 @@ Notifications (task completion, background agents) forward to ntfy / Slack / ema
 | [In-place edits to git-tracked source over SSH](plugin/scripts/remote_inplace_edit_guard.sh)                                 |
 | [Project-internal jargon shapes in commits and docs](plugin/scripts/jargon_scrub.sh)                                         |
 | [Timezone tokens that do not match the system clock](plugin/scripts/timezone_scrub.sh)                                       |
-| [Pre-flight checklist on long ML training launches](plugin/scripts/long_job_launch_inject.sh)                                |
+| [Pointer to the launch skill when an ML training job starts](plugin/scripts/launch_context.sh)                               |
 | [LaTeX compilation errors after .tex edits](plugin/scripts/latex_check.sh)                                                   |
 | [Unreviewed generated images/figures](plugin/scripts/visual_check.sh)                                                        |
 | [Research state loss before context overflow](plugin/scripts/save_state.sh)                                                  |

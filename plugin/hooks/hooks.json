@@ -10,7 +10,7 @@
           },
           {
             "type": "command",
-            "command": "${CLAUDE_PLUGIN_ROOT}/scripts/long_job_launch_inject.sh"
+            "command": "${CLAUDE_PLUGIN_ROOT}/scripts/launch_context.sh"
           }
         ]
       }
