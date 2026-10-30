@@ -100,12 +100,9 @@ Notifications (task completion, background agents) forward to ntfy / Slack / ema
 | ---------------------------------------------------------------------------------------------------------------------------- |
 | [Conclusions reviewed against actual artifacts by a fresh-context research peer](plugin/hooks/prompts/stop_research_peer.md) |
 | [In-place edits to git-tracked source over SSH](plugin/scripts/remote_inplace_edit_guard.sh)                                 |
-| [Unverified commands or paths in outbound teammate messages](plugin/scripts/outbound_artifact_reminder.sh)                   |
 | [Project-internal jargon shapes in commits and docs](plugin/scripts/jargon_scrub.sh)                                         |
 | [Timezone tokens that do not match the system clock](plugin/scripts/timezone_scrub.sh)                                       |
 | [Pre-flight checklist on long ML training launches](plugin/scripts/long_job_launch_inject.sh)                                |
-| [Fabricated paths in destructive commands (rm / mv / dd / force-push)](plugin/scripts/destructive_path_guard.sh)             |
-| [Missing citation verification when editing .tex/.bib](plugin/scripts/citation_guard.sh)                                     |
 | [LaTeX compilation errors after .tex edits](plugin/scripts/latex_check.sh)                                                   |
 | [Unreviewed generated images/figures](plugin/scripts/visual_check.sh)                                                        |
 | [Research state loss before context overflow](plugin/scripts/save_state.sh)                                                  |
@@ -117,7 +114,7 @@ Notifications (task completion, background agents) forward to ntfy / Slack / ema
 |                                           | phd-skills                  | flonat/claude-research       | Others       |
 | ----------------------------------------- | --------------------------- | ---------------------------- | ------------ |
 | Commands to learn                         | 6                           | 39                           | 13-20        |
-| Research integrity hooks                  | 11 (agent + 10 auto-detect) | 1                            | 0            |
+| Research integrity hooks                  | 8 (agent + 7 auto-detect)   | 1                            | 0            |
 | Paper reproduction (arxiv to runs)        | **Yes** (7-stage skill)     | No                           | No           |
 | Paper-code consistency audit              | 5-dimension parallel        | Read-only, no code cross-ref | None         |
 | Experiment monitoring + SSH notifications | Yes (ntfy / slack / email)  | No                           | No           |

@@ -75,7 +75,7 @@ ls -la /path/to/runs/
 cat configs/intended.yaml | head
 ```
 
-Never trust a path that was recalled from memory. The `destructive_path_guard.sh` hook will already block obvious cases for `rm`/`mv`, but the launch path needs the same scrutiny, a run started with a nonexistent dataset path crashes 30 minutes in instead of immediately.
+Never trust a path that was recalled from memory. A run started with a nonexistent dataset path crashes 30 minutes in instead of immediately.
 
 ### 4. Monitoring setup
 
@@ -97,7 +97,7 @@ Estimate wall-clock duration: `epochs × seconds-per-epoch / 3600 = hours`. Stat
 
 If this is a restart of a previously-failed run, or a kill before launching a replacement, purge stale artifacts in this exact order:
 
-1. **Local checkpoint dir** on the launching machine: `rm -rf /local/runs/<run-name>` (verify path first; the `destructive_path_guard.sh` will warn).
+1. **Local checkpoint dir** on the launching machine: `rm -rf /local/runs/<run-name>` (verify path first).
 2. **Remote artifact dir** on the cluster / NFS / object store: `rm -rf /remote/runs/<run-name>` (or equivalent).
 3. **Experiment tracker run**: delete via the tracker's API (`wandb api.run(...).delete()`, neptune `run.stop() + delete via UI`, etc.). Stale tracker runs corrupt later comparisons.
 4. **Scheduler reservation**: cancel the SLURM job (`scancel <jobid>`), the lambda labs reservation, the cron entry, etc. Runs that "killed but the GPUs are still allocated" are a recurring waste.
