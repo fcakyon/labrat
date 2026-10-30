@@ -20,7 +20,7 @@ The plan goes into `repro/<arxiv-id>/run_plan.md` with one row per planned run:
 
 ## Launch with the launch checklist
 
-Every full run goes through `/phd-skills:launch` first. The checklist will:
+Every full run goes through `/labrat:launch` first. The checklist will:
 
 - diff your config against the previous reference run
 - verify dataset and checkpoint paths
@@ -32,7 +32,7 @@ Do not skip the checklist for "small" runs. The hooks will warn anyway.
 
 ## Track progress at the paper's reported epochs
 
-Don't only check the final number. The paper usually reports a metric trajectory or at least mid-training checkpoints. Use `/phd-skills:compare` to align comparisons:
+Don't only check the final number. The paper usually reports a metric trajectory or at least mid-training checkpoints. Use `/labrat:compare` to align comparisons:
 
 > "Compare repro-main-seed0 to the paper's reported numbers at each of the paper's checkpoints (typically epochs 25, 50, 75, 100)."
 
@@ -85,10 +85,10 @@ Be honest. Reproductions that find gaps are more valuable than reproductions tha
 
 In `results.md`, cite which skills were used at each stage:
 
-> Implementation gaps tracked in `gaps_filled.md` and verified via the `/phd-skills:paper-check` skill (round-trip checked 2026-04-30).
-> Smoke runs ran clean per `/phd-skills:reproduce` stage 6.
-> Replication runs launched via `/phd-skills:launch` checklist (logs in `launch_logs/`).
-> Numerical comparison aligned via `/phd-skills:compare` at paper's reported epochs.
+> Implementation gaps tracked in `gaps_filled.md` and verified via the `/labrat:paper-check` skill (round-trip checked 2026-04-30).
+> Smoke runs ran clean per `/labrat:reproduce` stage 6.
+> Replication runs launched via `/labrat:launch` checklist (logs in `launch_logs/`).
+> Numerical comparison aligned via `/labrat:compare` at paper's reported epochs.
 
 This is also useful documentation for someone reviewing the reproduction later.
 

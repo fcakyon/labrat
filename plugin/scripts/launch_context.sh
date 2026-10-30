@@ -19,6 +19,6 @@ if ! echo "$command" | grep -qiE "$launcher_pattern"; then
 fi
 
 cat << 'EOF'
-{"hookSpecificOutput":{"hookEventName":"PreToolUse","additionalContext":"A training job is about to start. The /phd-skills:launch skill checks the config, run name, paths and monitoring first."}}
+{"hookSpecificOutput":{"hookEventName":"PreToolUse","additionalContext":"A training job is about to start. The /labrat:launch skill checks the config, run name, paths and monitoring first."}}
 EOF
 exit 0

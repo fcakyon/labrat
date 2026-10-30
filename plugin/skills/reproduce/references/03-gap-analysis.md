@@ -100,7 +100,7 @@ The fewer `[guess]` tags, the higher confidence the reproduction will replicate.
 
 ## Round-trip check
 
-After filling in `gaps_filled.md`, hand off to the `/phd-skills:paper-check` skill:
+After filling in `gaps_filled.md`, hand off to the `/labrat:paper-check` skill:
 
 > "Verify that gaps_filled.md is consistent with paper.md, every hyperparam I claimed `[paper §X]` for must actually be in section X."
 
@@ -118,4 +118,4 @@ This catches transcription errors and over-confident attributions before they pr
 
 - Every component identified as "missing" in stage 2's inventory now has values in `gaps_filled.md`
 - < 30% of values are `[guess]` tagged (more than that means the paper is genuinely under-specified and the reproduction will be approximate)
-- Round-trip with `/phd-skills:paper-check` raises no contradictions
+- Round-trip with `/labrat:paper-check` raises no contradictions

@@ -9,7 +9,7 @@ The most common comparison error is reporting "run A is 4 percentage points behi
 
 The agentic Stop hook routes here from `reason` when an assistant reports a delta without aligning the runs.
 
-If the question is "why did X fail / diverge / underperform", go to `/phd-skills:debug` first.
+If the question is "why did X fail / diverge / underperform", go to `/labrat:debug` first.
 
 ## Auto-detect the tracker
 
@@ -117,7 +117,7 @@ Put them in the Results Table of the experiment report below, and identify:
 2. For each ablation, compute the delta from baseline
 3. Rank by impact magnitude
 4. Check for interaction effects (A+B != A + B individually)
-5. To choose which ablations go in the paper, hand these deltas to Ablation Selection in `/phd-skills:rebuttal`
+5. To choose which ablations go in the paper, hand these deltas to Ablation Selection in `/labrat:rebuttal`
 
 ### Experiment report
 
@@ -154,7 +154,7 @@ Set up periodic monitoring:
 - Alert on anomalies (loss spike, NaN, OOM)
 - Notify when training completes
 
-Create a CronCreate job on `*/10 * * * *` that pipes a `{"title", "message"}` JSON object to the plugin notifier, which forwards it to whatever `/phd-skills:setup` configured (ntfy, Slack or email):
+Create a CronCreate job on `*/10 * * * *` that pipes a `{"title", "message"}` JSON object to the plugin notifier, which forwards it to whatever `/labrat:setup` configured (ntfy, Slack or email):
 
 ```bash
 echo "{\"title\": \"Training check\", \"message\": \"GPU util: $(nvidia-smi --query-gpu=utilization.gpu --format=csv,noheader)\"}" | ${CLAUDE_PLUGIN_ROOT}/scripts/notify.sh
