@@ -8,7 +8,7 @@
 
 Lab Rat teaches your AI coding agent to work like a careful ML researcher: reproduce papers, launch and compare runs at the same epoch, and check every claim before it costs you weeks of compute.
 
-Built by [Fatih Cagatay Akyon](https://scholar.google.com/citations?user=RHGyDE0AAAAJ) (2000+ citations, 5 patents) from 300+ Claude Code sessions. Every guardrail traces to a real mistake.
+Built by [Fatih Cagatay Akyon](https://scholar.google.com/citations?user=RHGyDE0AAAAJ) (2000+ citations, 5 patents) from 2200+ Claude Code and Codex sessions. Every guardrail traces to a real mistake.
 
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/flow-dark.svg" />
