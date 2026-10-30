@@ -52,8 +52,8 @@ If no reference exists in this project, ask the user to point at one. Do not lau
 
 The run name will live in wandb / neptune / checkpoint dirs / status reports for the rest of its life. It must describe the experiment in plain English without internal codes:
 
-- bad: `run-1`, `wave-2`, `cs-ad`, `phase2-internal`
-- good: `7src-fastvit-s-featmap-mlp-dinov3`, `coco-baseline-bs256-lr3e-4`, `swin-t-imagenet-distill-from-vit-l`
+- bad: `run-1`, `exp-b`, `final-v2`, `phase2-internal`
+- good: `imagenet-resnet50-bs256-lr0.1-cosine`, `coco-baseline-bs256-lr3e-4`, `swin-t-imagenet-distill-from-vit-l`
 
 The pattern: `<dataset/task>-<model>-<key-config>-<distinctive-recipe-piece>`. If you can't describe the experiment from the name in one sentence, the name is wrong. The Stop hook flags any run reference that uses session-local labels.
 
@@ -91,7 +91,7 @@ Confirm the run will appear under the right project / entity / experiment-name. 
 
 ### 5. ETA in your local timezone
 
-Estimate wall-clock duration: `epochs × seconds-per-epoch / 3600 = hours`. State the ETA in your local TZ (the system's TZ, which the `timezone_scrub.sh` hook validates against). If the run will straddle a meeting / sleep / OOO window, decide whether to defer or split.
+Estimate wall-clock duration: `epochs × seconds-per-epoch / 3600 = hours`. State the ETA in your local TZ (the system's TZ). If the run will straddle a meeting / sleep / OOO window, decide whether to defer or split.
 
 ## Restart and kill cleanup
 

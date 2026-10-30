@@ -35,9 +35,9 @@ If none, ask the user where metrics live before guessing.
 
 ### 1. Identify the runs
 
-Get full names (no shortcodes). If the user says "fvs-fm vs the baseline", clarify:
+Get full names (no shortcodes). If the user says "run-b vs the baseline", clarify:
 
-- which `fvs-fm` run (project + entity + run-id)
+- which `run-b` run (project + entity + run-id)
 - which baseline (full run name; baselines often have several variants)
 
 ### 2. Fetch metric history (not just final value)
@@ -88,7 +88,7 @@ If the user only has proxy data, say so explicitly. Never declare a winner from 
 
 ### 6. Run names in output
 
-In every line of the report, use full run names. Never `cs-ad vs fvs-fm`; always `phase1-7src-conv-s-adaptor-mlp vs phase1-7src-fastvit-s-featmap-mlp`. Future-you reading this will not remember the shortcode.
+In every line of the report, use full run names. Never `run-a vs run-b`; always `imagenet-resnet50-baseline-bs256 vs imagenet-resnet50-distill-from-vit-l`. Future-you reading this will not remember the shortcode.
 
 ## Anti-patterns
 

@@ -7,7 +7,7 @@ Now write the code that fills the gaps. The goal: minimum new code, maximum reus
 Use `uv` for fast, reproducible Python envs:
 
 ```bash
-cd repro/ < arxiv-id > /code/
+cd repro/<arxiv-id>/code/
 uv venv
 source .venv/bin/activate
 uv pip install torch numpy transformers wandb pyyaml

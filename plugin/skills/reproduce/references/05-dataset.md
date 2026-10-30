@@ -135,7 +135,7 @@ This document goes into `repro/<arxiv-id>/dataset_substitution.md` and is refere
 For large datasets, symlink into the workspace rather than copying:
 
 ```bash
-ln -s /shared/datasets/imagenet repro/ < arxiv-id > /data/imagenet
+ln -s /shared/datasets/imagenet repro/<arxiv-id>/data/imagenet
 ```
 
 Saves disk space and avoids stale duplicates.
