@@ -3,12 +3,12 @@ name: setup
 description: >
   30-second auto-detection tour, then optional configuration of notifications,
   CLI allowlist, research CLAUDE.md rules, and LaTeX environment.
-  Use when the user runs /phd-skills:setup.
+  Use when the user runs /labrat:setup.
 disable-model-invocation: true
 allowed-tools: Read, Write, Edit, Bash, Glob, Grep, AskUserQuestion
 ---
 
-# PHD-Skills Setup
+# Lab Rat Setup
 
 The plugin works correctly the moment it is installed. Most users never need to run setup. This skill exists to (1) show what was auto-detected on the user's system, and (2) let users opt into a few extras (notifications, allowlist, project CLAUDE.md, LaTeX).
 
@@ -33,7 +33,7 @@ project_orientation=""
 Then present:
 
 ```
-phd-skills auto-detected the following:
+Lab Rat auto-detected the following:
 
 Recent launches:    <count> training-job patterns in shell history
 Project orientation: ${project_orientation:-no README / CLAUDE.md / AGENTS.md found at project root}
@@ -77,7 +77,7 @@ Enter number:
 
 Based on selection:
 
-- **ntfy.sh**: ask for topic name, write to `.env` as `NTFY_TOPIC=<topic>`. Test with `curl -d "phd-skills test" ntfy.sh/<topic>`
+- **ntfy.sh**: ask for topic name, write to `.env` as `NTFY_TOPIC=<topic>`. Test with `curl -d "labrat test" ntfy.sh/<topic>`
 - **Slack**: ask for webhook URL, write to `.env` as `SLACK_WEBHOOK_URL=<url>`. Test with curl POST
 - **Email**: ask for recipient, write to `.env` as `NOTIFICATION_EMAIL=<email>`. Test with sendmail
 

@@ -17,7 +17,7 @@ Venue: $ARGUMENTS
 
 ## Step 1: Read the Paper and Results
 
-Discover the paper, result and config files as in Step 1 (Discover Files) of `/phd-skills:paper-check`, including wandb logs and checkpoint directories. Then list the paper's claims (contributions and experiments), its metrics and baselines, and every available run and its outcome, including the ablation variants the configs define.
+Discover the paper, result and config files as in Step 1 (Discover Files) of `/labrat:paper-check`, including wandb logs and checkpoint directories. Then list the paper's claims (contributions and experiments), its metrics and baselines, and every available run and its outcome, including the ablation variants the configs define.
 
 ## Step 2: Vulnerability Analysis
 
@@ -76,7 +76,7 @@ Draft response: [If answerable, 2-3 sentences]
 
 ## Step 5: Ablation Selection
 
-Take each delta from Ablation analysis in `/phd-skills:compare` (same-step, interaction-checked), then rank:
+Take each delta from Ablation analysis in `/labrat:compare` (same-step, interaction-checked), then rank:
 
 | Run | Factor Changed | Primary Metric Delta | Narrative Strength | Include? |
 |-----|---------------|--------------------|--------------------|----------|

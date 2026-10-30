@@ -2,7 +2,7 @@
 
 Three gated tiers. Each is cheap; each catches a class of failures the next can't. Do not advance to stage 7 until all three pass.
 
-If any tier fails, route to the `/phd-skills:debug` skill, do NOT speculate about causes or restart with an ad-hoc fix.
+If any tier fails, route to the `/labrat:debug` skill, do NOT speculate about causes or restart with an ad-hoc fix.
 
 ## Tier 1: Forward pass smoke (~30 seconds)
 
@@ -114,7 +114,7 @@ If tier 3 fails after tiers 1-2 pass, common causes:
 
 Do NOT restart with a different config and "see if it works." That hides the bug.
 
-Hand off to `/phd-skills:debug`:
+Hand off to `/labrat:debug`:
 
 > "Tier 2 smoke is failing, loss doesn't decrease after one optimizer step. Loss before: 6.92. Loss after: 6.92 (literally identical to 4 decimal places)."
 

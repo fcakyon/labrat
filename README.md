@@ -1,4 +1,6 @@
-# phd-skills
+<p align="center"><img src="assets/labrat.svg" alt="Lab Rat logo" width="120"></p>
+
+# Lab Rat
 
 Catch AI mistakes before they cost weeks of compute. Reproduce papers from arxiv. Debug runs evidence-first. Compare experiments at the right epoch. Launch with discipline.
 
@@ -9,7 +11,6 @@ PhD research. Every guardrail in this plugin traces to a real mistake.
 
 ![Claude Code Plugin](https://img.shields.io/badge/Claude_Code-Plugin-blue)
 ![MIT License](https://img.shields.io/badge/License-MIT-green)
-![Zero Dependencies](https://img.shields.io/badge/Dependencies-Zero-brightgreen)
 ![No MCP Required](https://img.shields.io/badge/MCP-Not_Required-lightgrey)
 
 ---
@@ -35,11 +36,13 @@ Other plugins give you more commands. **This plugin gives you guardrails.**
 ## Install
 
 ```
-claude plugin marketplace add fcakyon/phd-skills
-claude plugin install phd-skills@phd-skills
+claude plugin marketplace add fcakyon/labrat
+claude plugin install labrat@labrat
 ```
 
-The plugin works correctly the moment it is installed. Optional: run `/phd-skills:setup` for a 30-second tour of what was auto-detected and to opt into extras (notifications, allowlist, LaTeX).
+Coming from phd-skills? Remove it first with `claude plugin uninstall phd-skills@phd-skills` and `claude plugin marketplace remove phd-skills`.
+
+The plugin works correctly the moment it is installed. Optional: run `/labrat:setup` for a 30-second tour of what was auto-detected and to opt into extras (notifications, allowlist, LaTeX).
 
 ---
 
@@ -47,19 +50,19 @@ The plugin works correctly the moment it is installed. Optional: run `/phd-skill
 
 Open Claude Code in your project directory, then:
 
-- `/phd-skills:reproduce arxiv 2508.12345` reproduce a paper from arxiv URL through replication runs
+- `/labrat:reproduce arxiv 2508.12345` reproduce a paper from arxiv URL through replication runs
 - `"why is my loss diverging?"` the `debug` skill auto-triggers, runs evidence-first probes
 - `"compare run alpha to baseline"` the `compare` skill auto-triggers, aligns at the same epoch
 - `"launch the new training run"` the `launch` skill auto-triggers, runs the pre-flight checklist
 - `/loop 30m check experiment logs, notify me if metrics beat the baseline or if loss starts to diverge`
 
-Notifications (task completion, background agents) forward to ntfy / Slack / email after `/phd-skills:setup`.
+Notifications (task completion, background agents) forward to ntfy / Slack / email after `/labrat:setup`.
 
 ---
 
 ## What You Get
 
-### Skills (auto-trigger, or run as `/phd-skills:<skill>`)
+### Skills (auto-trigger, or run as `/labrat:<skill>`)
 
 | When you say...                                                       | Skill activates                                                   |
 | --------------------------------------------------------------------- | ----------------------------------------------------------------- |
@@ -73,7 +76,7 @@ Notifications (task completion, background agents) forward to ntfy / Slack / ema
 | "check if my numbers match the code" / "verify my BibTeX" / "prepare code for release" | [Paper Check](plugin/skills/paper-check/SKILL.md) |
 | "review my methods section for consistency" / "setup latex for CVPR"  | [Paper Write](plugin/skills/paper-write/SKILL.md)                 |
 | "what will reviewers ask about this?" / "pick my strongest ablations" | [Rebuttal](plugin/skills/rebuttal/SKILL.md)                       |
-| `/phd-skills:setup`                                                   | [Setup](plugin/skills/setup/SKILL.md)                             |
+| `/labrat:setup`                                                   | [Setup](plugin/skills/setup/SKILL.md)                             |
 
 ### Research Guardrails (run silently, you never invoke these)
 
@@ -86,7 +89,7 @@ Notifications (task completion, background agents) forward to ntfy / Slack / ema
 
 ## How It Compares
 
-|                                           | phd-skills                  | flonat/claude-research       | Others       |
+|                                           | Lab Rat                     | flonat/claude-research       | Others       |
 | ----------------------------------------- | --------------------------- | ---------------------------- | ------------ |
 | Commands to learn                         | 1 (skills auto-trigger)     | 39                           | 13-20        |
 | Research integrity hooks                  | 2 (agent + 1 command hook)  | 1                            | 0            |
@@ -112,12 +115,12 @@ MIT. Use it, fork it, adapt it to your research.
 
 ## Thank you for the support!
 
-[![Star History Chart](https://api.star-history.com/svg?repos=fcakyon/phd-skills&type=Date)](https://www.star-history.com/#fcakyon/phd-skills&Date)
+[![Star History Chart](https://api.star-history.com/svg?repos=fcakyon/labrat&type=Date)](https://www.star-history.com/#fcakyon/labrat&Date)
 
 ## Contributors
 
 <p align="center">
-    <a href="https://github.com/fcakyon/phd-skills/graphs/contributors">
-      <img src="https://contrib.rocks/image?repo=fcakyon/phd-skills" />
+    <a href="https://github.com/fcakyon/labrat/graphs/contributors">
+      <img src="https://contrib.rocks/image?repo=fcakyon/labrat" />
     </a>
 </p>
