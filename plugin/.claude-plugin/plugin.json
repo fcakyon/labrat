@@ -12,5 +12,6 @@
     "experiment-analysis",
     "citations",
     "latex"
-  ]
+  ],
+  "hooks": "./hooks/claude-hooks.json"
 }
