@@ -14,7 +14,8 @@ from pathlib import Path
 repo = Path(sys.argv[1])
 version = json.loads((repo / "plugin/.claude-plugin/plugin.json").read_text())["version"]
 for rel in [
-    "plugin/plugin.json",
+    "plugin/.codex-plugin/plugin.json",
+    "plugin/.cursor-plugin/plugin.json",
     "plugin/gemini-extension.json",
     ".claude-plugin/marketplace.json",
     ".cursor-plugin/marketplace.json",
