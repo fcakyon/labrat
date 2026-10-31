@@ -1,20 +1,5 @@
 {
   "name": "labrat",
   "version": "2.0.0",
-  "description": "Lab Rat: catch AI mistakes before they cost weeks of compute. Reproduce papers from arxiv. Debug runs evidence-first. Compare experiments at the right epoch. Launch with discipline.",
-  "hooks": {
-    "hooks": {
-      "PreToolUse": [
-        {
-          "matcher": "Bash",
-          "hooks": [
-            {
-              "type": "command",
-              "command": "${PLUGIN_ROOT}/scripts/launch_context.sh"
-            }
-          ]
-        }
-      ]
-    }
-  }
+  "description": "Lab Rat: catch AI mistakes before they cost weeks of compute. Reproduce papers from arxiv. Debug runs evidence-first. Compare experiments at the right epoch. Launch with discipline."
 }
