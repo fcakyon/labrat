@@ -57,7 +57,7 @@ codex plugin marketplace add fcakyon/labrat
 codex plugin add labrat@labrat
 ```
 
-Update with `codex plugin marketplace upgrade labrat`. Codex skips plugin hooks until you trust them, so enter `/hooks` once and trust the Lab Rat launch hook.
+Update with `codex plugin marketplace upgrade labrat`.
 
 </details>
 
@@ -84,7 +84,7 @@ Update with `git -C ~/.labrat pull`.
 
 </details>
 
-Every tool gets the same 11 skills. The launch hook runs in Claude Code and Codex, the research peer review and notifications in Claude Code only. Paper search needs [Paper Search CLI](https://github.com/fcakyon/paper-search-cli) (uv, Python 3.10+, [setup](plugin/skills/literature-research/references/paper-search.md)), nothing else does. Optional: `/labrat:setup` shows what it detected and turns on extras like notifications to ntfy, Slack or email, the command allowlist and LaTeX.
+Every tool gets the same 11 skills. The research peer review and notifications run in Claude Code only. Paper search needs [Paper Search CLI](https://github.com/fcakyon/paper-search-cli) (uv, Python 3.10+, [setup](plugin/skills/literature-research/references/paper-search.md)), nothing else does. Optional: `/labrat:setup` shows what it detected and turns on extras like notifications to ntfy, Slack or email, the command allowlist and LaTeX.
 
 ## Why
 
@@ -115,7 +115,7 @@ A skill starts when you describe its task, or run it as `/labrat:<skill>`.
 | "what will reviewers ask?", "pick my strongest ablations" | [rebuttal](plugin/skills/rebuttal/SKILL.md) |
 | `/labrat:setup` | [setup](plugin/skills/setup/SKILL.md) |
 
-Two [hooks](plugin/hooks/claude-hooks.json) run on their own: a [launch hook](plugin/scripts/launch_context.sh) points the agent to the launch skill when a training job starts (Claude Code and Codex), and a fresh-context research peer checks each conclusion against the actual artifacts (Claude Code only).
+In Claude Code, a fresh-context research peer [hook](plugin/hooks/claude-hooks.json) checks each conclusion against the actual artifacts and sends you to the matching skill, like the launch checklist before a run.
 
 For long runs, pair it with `/loop 30m check experiment logs, notify me if metrics beat the baseline or if loss starts to diverge`.
 
