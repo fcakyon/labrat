@@ -7,7 +7,7 @@ description: Write, structure, or revise academic paper sections, keep notation 
 
 For LaTeX environment setup, biber vs bibtex, venue templates and compilation, follow [references/latex.md](references/latex.md).
 
-For CVPR main-conference or workshop papers, also read [references/cvpr.md](references/cvpr.md) for narrative, teaser, table and figure design, main-versus-supplement selection, and rendered page-budget checks.
+For CVPR papers, use the concise guidance and LaTeX patterns in [references/cvpr.md](references/cvpr.md).
 
 ## Core Principles
 
