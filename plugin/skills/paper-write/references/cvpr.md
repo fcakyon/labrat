@@ -35,26 +35,47 @@ Use these patterns with the paper's current author kit. Build instructions are i
 - Bold declared numeric winners within comparable settings, including ties. Mark a selected configuration separately. If exposure differs, disclose it and call maxima descriptive.
 - Merge related ablations only while every panel stays legible. Update the generator and verify values and provenance remain unchanged.
 
-Example with illustrative values, using `booktabs`:
+### Copy a table layout
 
-```latex
-\begin{table}[t]
-\centering
-\begin{tabular}{lrr}
-\toprule
-Model & AP $\uparrow$ & ms $\downarrow$ \\
-\midrule
-Baseline & 48.0 & 3.1 \\
-\midrule
-Variant A$^{\dagger}$ & 47.8 & \textbf{2.8} \\
-Variant B & \textbf{49.2} & 3.4 \\
-\bottomrule
-\end{tabular}
-\caption{Illustrative matched comparison. Bold: best per column.
-$^{\dagger}$Selected configuration.}
-\label{tab:comparison}
-\end{table}
+Use [tables.tex](../assets/cvpr/tables.tex) to render the gallery with the current author kit, `booktabs` and `amssymb`. Copy individual snippets into the paper, not the gallery driver. All values are illustrative.
+
+- [Mixed directions](../assets/cvpr/tables/mixed-metrics.tex): AP ↑, latency ↓, selected-design symbol and numeric winners.
+- [Grouped columns](../assets/cvpr/tables/grouped-columns.tex): task headers with `\multicolumn` and `\cmidrule`.
+- [Row blocks](../assets/cvpr/tables/row-blocks.tex): thin rules and winners within each scale.
+- [Component ablation](../assets/cvpr/tables/component-ablation.tex): checkmarks and baseline-relative changes.
+- [Repeated runs](../assets/cvpr/tables/repeated-runs.tex): mean ± SD, bold mean only.
+- [Paired changes](../assets/cvpr/tables/paired-changes.tex): absolute endpoints and a separate supplied CI for the difference.
+- [Efficiency](../assets/cvpr/tables/efficiency.tex): accuracy ↑, parameter count, compute and latency ↓.
+- [Missing values and ties](../assets/cvpr/tables/missing-and-ties.tex): bold ties, unmeasured `--`, inapplicable `N/A`.
+- [Related panels](../assets/cvpr/tables/multi-panel.tex): two legible ablations in one full-width float.
+- [Per-class support](../assets/cvpr/tables/per-class-support.tex): support counts and row-wise model comparisons.
+
+## Choose a plot by the question
+
+[plots.py](../assets/cvpr/plots.py) contains independent drawing functions. From the `paper-write` skill directory, generate the illustrative gallery, then adapt its JSON inputs or copy the relevant function:
+
+```bash
+uv run assets/cvpr/plots.py --demo --output-dir /tmp/cvpr-gallery
+uv run assets/cvpr/plots.py --data results.json --plot paired_intervals --output-dir fig
 ```
+
+- `accuracy_latency`: measured accuracy versus latency, one curve per model family.
+- `paired_scores`: matched absolute scores as dumbbells.
+- `paired_intervals`: supplied paired changes and CIs on a delta axis.
+- `seed_ablation`: individual runs, mean and sample SD. Supply at least two runs per arm.
+- `learning_curves`: recorded scores with explicitly labelled, supplied uncertainty bands.
+- `small_multiples`: separate task/view axes using consistent encoding.
+- `error_heatmap`: error rates with a separate denominator in each column label.
+- `confusion_matrix`: raw counts that preserve class support.
+- `patient_ecdf`: the distribution of within-patient changes, without a fitted density.
+- `qualitative_grid`: input, reference, prediction and extra/missed-pixel overlays.
+- `pipeline`: editable vector boxes and arrows for the experiment protocol.
+- `teaser`: matched scores and their supplied paired-change intervals side by side.
+
+- `--demo` writes illustrative JSON, synthetic masks, individual PDFs/PNGs and both galleries. Only demo mode stamps the figures.
+- Real JSON needs only the selected function's keys. Qualitative paths are relative to that JSON. Replace demo values with verified records and retain actual missingness and interval definitions.
+- Gray marks baselines or raw runs, blue the treatment, vermilion the second arm or extra pixels. Use marker fill and direct labels as well as color.
+- Inspect at final column or full width. Separate crowded end labels or use a legend. The gallery preserves relative figure sizes. Supplied intervals stay on their own axes and do not establish significance.
 
 ## Main paper and supplement
 
