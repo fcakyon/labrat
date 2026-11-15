@@ -75,7 +75,7 @@ uv run assets/cvpr/plots.py --data results.json --plot paired_intervals --output
 - `--demo` writes illustrative JSON, synthetic masks, individual PDFs/PNGs and both galleries. Only demo mode stamps the figures.
 - Real JSON needs only the selected function's keys. Qualitative paths are relative to that JSON. Replace demo values with verified records and retain actual missingness and interval definitions.
 - Gray marks baselines or raw runs, blue the treatment, vermilion the second arm or extra pixels. Use marker fill and direct labels as well as color.
-- Inspect at final column or full width. Separate crowded end labels or use a legend. The gallery preserves relative figure sizes. Supplied intervals stay on their own axes and do not establish significance.
+- Inspect at final column or full width. Separate crowded end labels or use a legend. The gallery preserves relative figure sizes. The plotter preserves supplied intervals and performs no statistical tests.
 
 ## Main paper and supplement
 
