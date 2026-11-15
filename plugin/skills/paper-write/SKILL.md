@@ -1,11 +1,13 @@
 ---
 name: paper-write
-description: Write, structure, or revise academic paper sections, keep notation consistent, refine figures and tables, and set up or fix the LaTeX build (TeX distribution, biber vs bibtex, venue templates, compilation). Use when the user says "write the abstract", "structure the methods", "improve this section", "notation consistency", "figure refinement", "paper structure", "setup latex", "biber vs bibtex", "latex compilation error", "install latex packages", "venue template", or "texlive setup".
+description: Write, structure, or revise academic paper sections, keep notation consistent, refine figures and tables (including CVPR presentation), and set up or fix the LaTeX build (TeX distribution, biber vs bibtex, venue templates, compilation). Use when the user says "write the abstract", "structure the methods", "improve this section", "notation consistency", "figure refinement", "paper structure", "setup latex", "biber vs bibtex", "latex compilation error", "install latex packages", "venue template", or "texlive setup".
 ---
 
 # Paper Write: academic paper writing and LaTeX setup
 
 For LaTeX environment setup, biber vs bibtex, venue templates and compilation, follow [references/latex.md](references/latex.md).
+
+For CVPR papers, use the concise guidance, runnable plot templates and copyable LaTeX tables in [references/cvpr.md](references/cvpr.md).
 
 ## Core Principles
 
@@ -25,11 +27,13 @@ For LaTeX environment setup, biber vs bibtex, venue templates and compilation, f
 ### Abstract
 
 - Structure: problem → approach → key result → significance
-- Include 1-2 concrete numbers (dataset size, main metric improvement)
+- Include only concrete numbers needed to convey the main result (dataset size, main metric improvement)
 - Every number must be traceable to a specific experiment
 - No citations in abstract unless venue requires it
 
 ### Introduction
+
+Adapt this outline to the paper and venue rather than enforcing a fixed paragraph count.
 
 - Paragraph 1: Problem and why it matters (societal/practical motivation)
 - Paragraph 2: Why existing approaches are insufficient (gap)
@@ -56,7 +60,7 @@ For LaTeX environment setup, biber vs bibtex, venue templates and compilation, f
 - Dataset: size, splits, preprocessing (cite or describe collection)
 - Metrics: define formally, explain why these metrics
 - Baselines: justify selection, ensure fair comparison
-- Results table: highlight best results, include std dev or CI if available
+- Results table: highlight best results within comparable settings, include std dev or CI if available
 - Ablations: one factor at a time, clearly show contribution of each component
 
 ### Conclusion
@@ -88,7 +92,7 @@ Before generating or modifying any figure:
 
 - What data does it show? (exact source file/variable)
 - What message should the reader take away?
-- What are the hard constraints? (font size ≥ 8pt, column width, color scheme)
+- What are the hard constraints? (venue/project font constraints, column width, color scheme)
 - What aspects of the current version are correct and must be preserved?
 
 ### 2. Constraint Preservation
