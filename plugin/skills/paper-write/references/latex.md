@@ -50,7 +50,7 @@ Common venues and their requirements:
 
 | Venue     | Class                   | Bib system         | Notes                           |
 | --------- | ----------------------- | ------------------ | ------------------------------- |
-| CVPR/ECCV | Custom class file       | bibtex             | Usually provided in template    |
+| CVPR      | article + venue style   | bibtex             | Usually provided in template    |
 | NeurIPS   | neurips_20XX.sty        | natbib + bibtex    | Style file changes yearly       |
 | ICLR      | iclr20XX_conference.sty | natbib + bibtex    | OpenReview format               |
 | ACL/EMNLP | acl.cls                 | bibtex             | ACL Anthology format            |
