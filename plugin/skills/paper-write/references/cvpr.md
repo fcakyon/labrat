@@ -31,9 +31,9 @@ Use these patterns with the paper's current author kit. Build instructions are i
 
 ## Tables
 
-- Prefer thin rules to repeated group-heading rows. Use short row labels, grouped column headers, explicit units and consistent precision. Timing captions state hardware and batch size.
+- Prefer thin rules to repeated group-heading rows. Use short row labels, grouped column headers, explicit units and consistent precision. Timing captions state hardware and batch size. Drop columns that are constant or bookkeeping (status, checkpoint) and state constants in the caption. Name the actual input source, such as the detector that produced the boxes, never internal run codes. Spell out abbreviated headers (Truncated, not Trunc.).
 - Bold declared numeric winners within comparable settings, including ties. Mark a selected configuration separately. If exposure differs, disclose it and call maxima descriptive.
-- Merge related ablations only while every panel stays legible. Update the generator and verify values and provenance remain unchanged.
+- Generate every cell from a results file, never from copied literals. Give display labels one owner (a label map) applied before formatting. Merge related ablations only while every panel stays legible. Before and after any table edit, diff the displayed numbers and provenance and keep both identical.
 
 ### Copy a table layout
 
@@ -61,7 +61,7 @@ uv run assets/cvpr/plots.py --data results.json --plot paired_intervals --output
 
 - `accuracy_latency`: measured accuracy versus latency, one curve per model family.
 - `paired_scores`: matched absolute scores as dumbbells.
-- `paired_intervals`: supplied paired changes and CIs on a delta axis.
+- `paired_intervals`: supplied paired changes and CIs on a delta axis. Open markers are supplied intervals that include zero.
 - `seed_ablation`: individual runs, mean and sample SD. Supply at least two runs per arm.
 - `learning_curves`: recorded scores with explicitly labelled, supplied uncertainty bands.
 - `small_multiples`: separate task/view axes using consistent encoding.
