@@ -72,6 +72,9 @@ sudo apt install texlive-latex-extra  # most \usepackage needs
 sudo apt install texlive-fonts-recommended texlive-fonts-extra
 sudo apt install texlive-bibtex-extra biber  # if biblatex used
 sudo apt install texlive-science  # algorithm2e, etc.
+
+# Find the texlive-* package that ships a missing .sty
+apt-file search <name>.sty
 ```
 
 ### On macOS
@@ -101,7 +104,7 @@ pdflatex main.tex
 
 - **Missing .bib file**: check `\bibliography{...}` path is correct
 - **Undefined citations**: run bibtex/biber + pdflatex twice
-- **Missing packages**: install via tlmgr, not apt (apt packages are coarse-grained)
+- **Missing packages**: install by distribution as in Step 4
 - **Font errors**: install texlive-fonts-extra
 - **TikZ externalize errors**: ensure write18 is enabled
 

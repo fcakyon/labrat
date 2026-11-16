@@ -143,9 +143,19 @@ def draw_intervals(ax, row):
         row (dict): Labels, point, low, high and axis title.
     """
     y = np.arange(len(row["labels"]))
-    ax.axvline(0, color="0.4", linewidth=0.8)
+    ax.axvline(0, color="0.4", linewidth=0.8, ls="--")
     ax.hlines(y, row["low"], row["high"], color=BLUE, linewidth=1.8)
-    ax.scatter(row["point"], y, s=26, color=BLUE, zorder=3)
+    ax.scatter(
+        row["point"],
+        y,
+        s=26,
+        facecolors=[
+            BLUE if lo > 0 or hi < 0 else "white"
+            for lo, hi in zip(row["low"], row["high"])
+        ],
+        edgecolors=BLUE,
+        zorder=3,
+    )
     ax.set(
         yticks=y,
         yticklabels=row["labels"],
