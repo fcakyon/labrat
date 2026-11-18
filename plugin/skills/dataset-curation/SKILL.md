@@ -51,16 +51,15 @@ Check for bias along relevant protected attributes:
 - Equalized odds: equal TPR and FPR across groups
 - Representation ratio: group proportion in data vs population
 
-## Step 3: Stratified Sampling
+## Step 3: Stratified & Grouped Splitting
 
 When creating splits (train/val/test):
 
-1. **Primary stratification**: by label/class distribution
-2. **Secondary stratification**: by source (prevent source leakage across splits)
+1. **Grouping (prevent source leakage)**: keep all samples from the same source/subject/session in one split when evaluating generalization to unseen sources
+2. **Stratification**: balance label/class distribution across splits (stratified group splitting when grouped; direct label/source stratification only when splitting within shared sources)
 3. **Validation**:
-   - Chi-squared test for label distribution similarity across splits
-   - No source overlap between splits
-   - Rare classes have minimum representation in each split
+   - Label balance across splits (e.g. chi-squared test) and rare-class coverage where group sizes allow
+   - Zero group/source overlap (when grouped) and no exact or near-duplicate leakage across splits
 
 Split ratios depend on dataset size:
 - Large (>50k): 80/10/10 or 90/5/5
