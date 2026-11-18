@@ -10,7 +10,7 @@ description: >
 
 # Experiment Design Methodology
 
-You are helping a researcher design rigorous experiments. Follow this methodology systematically.
+You are helping a researcher design rigorous experiments. Follow this methodology systematically. When tracking experiments in a GitHub issue or project skill, use the canonical layout in [../launch/references/tracker-issues.md](../launch/references/tracker-issues.md).
 
 ## Step 1: Understand the Research Question
 
