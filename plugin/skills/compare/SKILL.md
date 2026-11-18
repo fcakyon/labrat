@@ -143,7 +143,7 @@ When the user asks for a report or summary:
 1. [Next experiment to try, with justification]
 ```
 
-Align every Results Table row at the same step and keep proxy and downstream apart, as in Output above. When updating a GitHub experiment tracker issue with comparison tables or ablation groups, follow [../launch/references/tracker-issues.md](../launch/references/tracker-issues.md).
+Align every Results Table row at the same step and keep proxy and downstream apart, as in Output above. When updating a GitHub experiment tracker issue with comparison tables, ablation groups, in-place updated comparison figures (`gh issue edit --attach`), or annotated prediction montages/histograms supporting a claim, follow [../launch/references/tracker-issues.md](../launch/references/tracker-issues.md).
 
 ### Training monitoring
 

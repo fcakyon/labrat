@@ -5,7 +5,7 @@ description: Pre-flight checklist for long-running ML training jobs and GitHub r
 
 # Launch: pre-flight checklist for long ML training jobs
 
-For creating or updating GitHub research and experiment tracker issues (top reproduction accordion, concise overview bullets, summary table, and closed `<details>` ablation groups with uniform column schemas), follow [references/tracker-issues.md](references/tracker-issues.md).
+For creating or updating GitHub research and experiment tracker issues (top reproduction accordion, concise overview bullets, in-place replaced summary comparison figures via `gh --attach`, qualitative annotated prediction montages/histograms for claims, summary table, and closed `<details>` ablation groups with uniform column schemas), follow [references/tracker-issues.md](references/tracker-issues.md).
 
 Long training jobs are expensive to fail. A 12-hour run that crashes on epoch 3 from a missing dataset path or a default `workers=8` against an NFS mount is a full day lost. This skill walks six quick checks before you commit the GPUs.
 
